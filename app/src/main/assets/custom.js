@@ -24,3 +24,17 @@ window.open = function (url, target, features) {
 }
 
 document.addEventListener('click', hookClick, { capture: true })
+
+// ========== 下面是新增的缓存优化代码 ==========
+window.addEventListener('load', () => {
+    // 尝试给游戏页面创建独立缓存
+    if ('caches' in window) {
+        caches.open('game-cache-v1').then(cache => {
+            cache.addAll([window.location.href])
+        })
+    }
+    // 页面卸载前，阻止清空缓存（辅助延长资源留存时间）
+    window.onbeforeunload = function(e) {
+        e.preventDefault()
+    }
+})
