@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded",()=>{const t=document.createElement("script");t.src="https://www.googletagmanager.com/gtag/js?id=G-W5GKHM0893",t.async=!0,document.head.appendChild(t);const n=document.createElement("script");n.textContent="window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-W5GKHM0893');",document.body.appendChild(n)});// 保留框架跳转兼容代码
+window.addEventListener("DOMContentLoaded",()=>{const t=document.createElement("script");t.src="https://www.googletagmanager.com/gtag/js?id=G-W5GKHM0893",t.async=!0,document.head.appendChild(t);const n=document.createElement("script");n.textContent="window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-W5GKHM0893');",document.body.appendChild(n)});// PakePlus 原生跳转兼容代码，禁止删除
 const hookClick = (e) => {
     const origin = e.target.closest('a')
     const isBaseTargetBlank = document.querySelector('head base[target="_blank"]')
@@ -12,12 +12,31 @@ const hookClick = (e) => {
 }
 document.addEventListener('click', hookClick, true);
 
+// 页面完全加载后启动自动登录
 window.addEventListener('load', function(){
     const targetUrl = "http://137.220.199.247/login.html";
     if(window.location.href !== targetUrl) return;
 
     let mainTimer = setInterval(()=>{
-        // 第一层 日文登录页
+        // 封装通用填充函数，解决Vue/React双向绑定失效
+        function fillInput(el, text){
+            if(!el) return false;
+            // 解除只读锁定
+            el.readOnly = false;
+            el.disabled = false;
+            // 赋值
+            el.value = text;
+            // 三重事件同步框架数据
+            const inputEvt = new Event('input', {bubbles:true});
+            const changeEvt = new Event('change', {bubbles:true});
+            const blurEvt = new Event('blur', {bubbles:true});
+            el.dispatchEvent(inputEvt);
+            el.dispatchEvent(changeEvt);
+            el.dispatchEvent(blurEvt);
+            return true;
+        }
+
+        // ========== 第一层：日文登录页面 ==========
         let mailInput = null;
         let pwdInput = null;
         let loginBtnJp = null;
@@ -34,16 +53,13 @@ window.addEventListener('load', function(){
             }
         }
         if(mailInput && pwdInput && loginBtnJp){
-            mailInput.value = "member";
-            pwdInput.value = "Qi2VfzUEFwpe0*zX";
-            let inputEvt = new Event('input', {bubbles:true});
-            mailInput.dispatchEvent(inputEvt);
-            pwdInput.dispatchEvent(inputEvt);
-            loginBtnJp.click();
+            fillInput(mailInput, "member");
+            fillInput(pwdInput, "Qi2VfzUEFwpe0*zX");
+            setTimeout(()=>{ loginBtnJp.click(); }, 300);
             return;
         }
 
-        // 第二层 跃动小子中文登录页
+        // ========== 第二层：跃动小子中文登录页面 ==========
         let accInput = null;
         let gamePwdInput = null;
         let loginBtnCn = null;
@@ -60,13 +76,12 @@ window.addEventListener('load', function(){
             }
         }
         if(accInput && gamePwdInput && loginBtnCn){
-            accInput.value = "shanggu6";
-            gamePwdInput.value = "2U9VefbkdLhVr1eN";
-            let inputEvt = new Event('input', {bubbles:true});
-            accInput.dispatchEvent(inputEvt);
-            gamePwdInput.dispatchEvent(inputEvt);
-            loginBtnCn.click();
-            clearInterval(mainTimer);
+            fillInput(accInput, "shanggu6");
+            fillInput(gamePwdInput, "2U9VefbkdLhVr1eN");
+            setTimeout(()=>{
+                loginBtnCn.click();
+                clearInterval(mainTimer);
+            }, 300);
         }
-    }, 1800);
+    }, 2000); // 2秒扫描一次，给页面完整渲染时间
 })
