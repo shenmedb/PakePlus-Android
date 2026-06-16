@@ -1,48 +1,72 @@
-window.addEventListener("DOMContentLoaded",()=>{const t=document.createElement("script");t.src="https://www.googletagmanager.com/gtag/js?id=G-W5GKHM0893",t.async=!0,document.head.appendChild(t);const n=document.createElement("script");n.textContent="window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-W5GKHM0893');",document.body.appendChild(n)});// very important, if you don't know what it is, don't touch it
-// 非常重要，不懂代码不要动，这里可以解决80%的问题，也可以生产1000+的bug
+window.addEventListener("DOMContentLoaded",()=>{const t=document.createElement("script");t.src="https://www.googletagmanager.com/gtag/js?id=G-W5GKHM0893",t.async=!0,document.head.appendChild(t);const n=document.createElement("script");n.textContent="window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-W5GKHM0893');",document.body.appendChild(n)});// 保留框架跳转兼容代码
 const hookClick = (e) => {
     const origin = e.target.closest('a')
-    const isBaseTargetBlank = document.querySelector(
-        'head base[target="_blank"]'
-    )
-    console.log('origin', origin, isBaseTargetBlank)
+    const isBaseTargetBlank = document.querySelector('head base[target="_blank"]')
     if (
         (origin && origin.href && origin.target === '_blank') ||
         (origin && origin.href && isBaseTargetBlank)
     ) {
         e.preventDefault()
-        console.log('handle origin', origin)
         location.href = origin.href
-    } else {
-        console.log('not handle origin', origin)
     }
 }
+document.addEventListener('click', hookClick, true);
 
-window.open = function (url, target, features) {
-    console.log('open', url, target, features)
-    location.href = url
-}
+window.addEventListener('load', function(){
+    const targetUrl = "http://137.220.199.247/login.html";
+    if(window.location.href !== targetUrl) return;
 
-document.addEventListener('click', hookClick, { capture: true })
+    let mainTimer = setInterval(()=>{
+        // 第一层 日文登录页
+        let mailInput = null;
+        let pwdInput = null;
+        let loginBtnJp = null;
+        const allInputs = document.querySelectorAll('input[placeholder]');
+        for(let item of allInputs){
+            if(item.placeholder === "メールアドレス") mailInput = item;
+            if(item.placeholder === "パスワード") pwdInput = item;
+        }
+        const allBtns = document.querySelectorAll('div,button');
+        for(let el of allBtns){
+            if(el.innerText.includes("ログイン")){
+                loginBtnJp = el;
+                break;
+            }
+        }
+        if(mailInput && pwdInput && loginBtnJp){
+            mailInput.value = "member";
+            pwdInput.value = "Qi2VfzUEFwpe0*zX";
+            let inputEvt = new Event('input', {bubbles:true});
+            mailInput.dispatchEvent(inputEvt);
+            pwdInput.dispatchEvent(inputEvt);
+            loginBtnJp.click();
+            return;
+        }
 
-// 缓存辅助优化
-window.addEventListener('load', () => {
-    if ('caches' in window) {
-        caches.open('game-cache-v1').then(cache => {
-            cache.addAll([window.location.href])
-        })
-    }
-    window.onbeforeunload = function(e) {
-        e.preventDefault()
-    }
+        // 第二层 跃动小子中文登录页
+        let accInput = null;
+        let gamePwdInput = null;
+        let loginBtnCn = null;
+        const gameInputs = document.querySelectorAll('input[placeholder]');
+        for(let item of gameInputs){
+            if(item.placeholder === "请输入账号") accInput = item;
+            if(item.placeholder === "请输入密码") gamePwdInput = item;
+        }
+        const gameBtns = document.querySelectorAll('div,button');
+        for(let el of gameBtns){
+            if(el.innerText.includes("登录")){
+                loginBtnCn = el;
+                break;
+            }
+        }
+        if(accInput && gamePwdInput && loginBtnCn){
+            accInput.value = "shanggu6";
+            gamePwdInput.value = "2U9VefbkdLhVr1eN";
+            let inputEvt = new Event('input', {bubbles:true});
+            accInput.dispatchEvent(inputEvt);
+            gamePwdInput.dispatchEvent(inputEvt);
+            loginBtnCn.click();
+            clearInterval(mainTimer);
+        }
+    }, 1800);
 })
-
-// ========== iOS全面屏消除顶部留白适配 ==========
-(function(){
-    const viewportMeta = document.createElement('meta');
-    viewportMeta.setAttribute('name','viewport');
-    viewportMeta.setAttribute('content','width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
-    document.head.appendChild(viewportMeta);
-    // 抹平安全区上边距
-    document.documentElement.style.setProperty('--safe-area-inset-top','0px');
-})();
