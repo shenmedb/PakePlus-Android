@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>抽奖规则 - 起源联盟福利抽奖</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+body {
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+}
+.page-title {
+    font-size: 2rem;
+    color: #ffcc00;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.rule-container {
+    background-color: #1a1a1a;
+    border-radius: 16px;
+    padding: 25px;
+    width: 100%;
+    max-width: 550px;
+    border: 1px solid #333;
+    margin-bottom: 25px;
+}
+.rule-item {
+    margin-bottom: 20px;
+}
+.rule-item h3 {
+    color: #ffcc00;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    border-left: 4px solid #ffcc00;
+    padding-left: 10px;
+}
+.rule-content {
+    color: #eee;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.rule-content p {
+    margin-bottom: 8px;
+}
+.check-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 25px 0;
+}
+.check-group input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+.check-group label {
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+}
+.btn-box {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+.btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.agree-btn {
+    background: #ffcc00;
+    color: #000;
+}
+.refuse-btn {
+    background: #666;
+    color: #fff;
+}
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.flow-footer {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 30px;
+  padding-bottom: 10px;
+  line-height: 1.4;
+}
+.flow-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.flow-line a {
+  color: #fff !important;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.flow-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<h1 class="page-title">抽奖活动规则</h1>
+<div class="rule-container">
+    <div class="rule-item">
+        <h3>一、抽奖规则</h3>
+        <div class="rule-content">
+            <p>1. 本活动仅限起源联盟内部成员参与，需填写正确游戏角色名及联盟信息。</p>
+            <p>2. 每位成员抽奖一日一次，奖品随机派发，活动全程公平公正。</p>
+            <p>3. 转盘抽奖结果最终生效，一经抽取不支持更换、退换奖品。</p>
+            <p>4. 所有奖品均为游戏虚拟道具，不具备任何现金等值与商业价值。</p>
+        </div>
+    </div>
+
+    <div class="rule-item">
+        <h3>二、抽奖须知</h3>
+        <div class="rule-content">
+            <p>1. 参与抽奖请如实填写角色与联盟信息，信息错误导致无法发放奖品自行负责。</p>
+            <p>2. 禁止使用脚本、外挂、恶意刷奖等违规行为，一经发现永久取消参与资格。</p>
+            <p>3. 奖品由联盟管理员统一统计安排发放，请耐心等待。</p>
+            <p>4. 活动最终解释权归起源联盟所有，官方有权根据情况调整活动规则。</p>
+        </div>
+    </div>
+
+    <div class="rule-item">
+        <h3>三、免责声明</h3>
+        <div class="rule-content">
+            <p>1. 本活动仅为内部娱乐交流，纯属玩家自发娱乐，禁止任何商业用途。</p>
+            <p>2. 因个人网络波动、设备异常造成抽奖失败、卡顿丢失数据，本联盟概不负责。</p>
+            <p>3. 参与者自愿参与本次活动，知晓并接受相关风险，自愿遵守各项规定。</p>
+            <p>4. 如遇不可抗力、系统维护等情况，主办方有权暂停或终止活动，无需另行告知。</p>
+        </div>
+    </div>
+
+    <div class="check-group">
+        <input type="checkbox" id="agreeCheck">
+        <label for="agreeCheck">我已仔细阅读并同意以上抽奖规则、须知及免责声明</label>
+    </div>
+
+    <div class="btn-box">
+        <button class="btn agree-btn" id="enterBtn" disabled>同意并进入抽奖</button>
+        <button class="btn refuse-btn" id="closeBtn">不同意返回主页</button>
+    </div>
+</div>
+
+<div class="flow-footer">
+  <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+  <div class="flow-line">© 2026 起源联盟 版权所有</div>
+  <div class="flow-line">
+    <a href="https://beian.miit.gov.cn/" target="_blank">
+      <img src="foot-icp.png" alt="备案">
+      浙ICP备2026025846号-1
+    </a>
+  </div>
+  <div class="flow-line">
+    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+      <img src="foot-gongan.png" alt="公安备案">
+      浙公网安备33052202000916号
+    </a>
+  </div>
+</div>
+
+<script>
+const agreeCheck = document.getElementById('agreeCheck');
+const enterBtn = document.getElementById('enterBtn');
+const closeBtn = document.getElementById('closeBtn');
+
+agreeCheck.addEventListener('change', function() {
+    enterBtn.disabled = !this.checked;
+});
+
+enterBtn.onclick = () => location.href = '/choujiang/lottery.html';
+
+closeBtn.onclick = () => location.href = '/index.html';
+</script>
+
+</body>
+</html>
