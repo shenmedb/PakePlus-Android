@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>战宠进化超凡概率</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #111;
+            color: #eee;
+            padding: 10px;
+            padding-bottom: 85px;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .title {
+            text-align: center;
+            color: #ffcc00;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #222;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #444;
+            padding: 10px 6px;
+            text-align: center;
+            color: #ddd;
+            font-size: 14px;
+        }
+        th {
+            background-color: #ff4444;
+            color: #fff;
+            font-size: 15px;
+        }
+        tr:nth-child(even) {
+            background-color: #292929;
+        }
+        tr:hover {
+            background-color: #333;
+        }
+        .info {
+            background: #292929;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 8px;
+            color: #eee;
+            font-size: 15px;
+        }
+        .info p {
+            margin-bottom: 6px;
+        }
+        .btn-group{
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            gap: 12px;
+            padding: 12px 15px;
+            background: #111;
+            z-index: 999;
+            margin: 0;
+        }
+        .btn{
+            flex:1;background:#222;color:#ffcc00;
+            text-align:center;padding:14px;border-radius:8px;
+            text-decoration:none;border:1px solid #333;
+        }
+        .btn:hover{background:#2c2c2c}
+
+        .flow-footer {
+          text-align: center;
+          color: #fff;
+          font-size: 12px;
+          margin-top: 20px;
+          padding-bottom: 10px;
+          line-height: 1.7;
+        }
+        .flow-line {
+          height: 15px;
+          line-height: 22px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+        }
+        .flow-line a {
+          color: #fff !important;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+        }
+        .flow-line img {
+          width: 13px;
+          height: 13px;
+          display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title">战宠进化超凡概率</div>
+    <div class="subtitle">
+        配置：双红专属技能<br>
+        等级：80级、95级、105级、115级<br>
+        元素切换：使用材料【元素亲和石】
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>进化路径</th>
+                <th>进化概率</th>
+                <th>加成说明</th>
+                <th>成长消耗</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>蓝色 ➫ 紫色</td>
+                <td>100%</td>
+                <td>固定概率</td>
+                <td>600</td>
+            </tr>
+            <tr>
+                <td>紫色 ➫ 黄色</td>
+                <td>50%</td>
+                <td>固定概率</td>
+                <td>1000</td>
+            </tr>
+            <tr>
+                <td>黄色 ➫ 橙色</td>
+                <td>28.2%</td>
+                <td>双专属加成后概率</td>
+                <td>2400</td>
+            </tr>
+            <tr>
+                <td>黄色 ➫ 橙一</td>
+                <td>11.8%</td>
+                <td>双专属加成后概率</td>
+                <td>2400</td>
+            </tr>
+            <tr>
+                <td>橙色 ➫ 红色</td>
+                <td>25.4%</td>
+                <td>双专属加成后概率</td>
+                <td>9000</td>
+            </tr>
+            <tr>
+                <td>橙色 ➫ 红一</td>
+                <td>6.7%</td>
+                <td>双专属加成后概率</td>
+                <td>9000</td>
+            </tr>
+            <tr>
+                <td>橙一 ➫ 红一</td>
+                <td>25.4%</td>
+                <td>双专属加成后概率</td>
+                <td>18000</td>
+            </tr>
+            <tr>
+                <td>橙一 ➫ 红二</td>
+                <td>6.7%</td>
+                <td>双专属加成后概率</td>
+                <td>18000</td>
+            </tr>
+            <tr>
+                <td>红色 ➫ 红一</td>
+                <td>32.0%</td>
+                <td>固定概率</td>
+                <td>12000</td>
+            </tr>
+            <tr>
+                <td>红一 ➫ 红二</td>
+                <td>32.0%</td>
+                <td>固定概率</td>
+                <td>16000</td>
+            </tr>
+            <tr>
+                <td>红二 ➫ 超凡零/0</td>
+                <td>12.6%</td>
+                <td>80级加成后16.0%</td>
+                <td>20000</td>
+            </tr>
+            <tr>
+                <td>红二 ➫ 超凡零/1</td>
+                <td>10.0%</td>
+                <td>80级加成后12.8%</td>
+                <td>20000</td>
+            </tr>
+            <tr>
+                <td>红二 ➫ 超凡零/2</td>
+                <td>2.5%</td>
+                <td>80级加成后3.2%</td>
+                <td>20000</td>
+            </tr>
+
+            <tr>
+                <td>超凡零/x ➫ 超凡一/x</td>
+                <td>10.0%</td>
+                <td>95级加成后12.8%</td>
+                <td>24000</td>
+            </tr>
+            <tr>
+                <td>超凡零/x ➫ 超凡一/x+1</td>
+                <td>12.5%</td>
+                <td>95级加成后16.0%</td>
+                <td>24000</td>
+            </tr>
+            <tr>
+                <td>超凡零/x ➫ 超凡一/x+2</td>
+                <td>2.5%</td>
+                <td>95级加成后3.2%</td>
+                <td>24000</td>
+            </tr>
+
+            <tr>
+                <td>超凡一/x ➫ 超凡二/x</td>
+                <td>7.5%</td>
+                <td>105级加成后9.6%</td>
+                <td>28000</td>
+            </tr>
+            <tr>
+                <td>超凡一/x ➫ 超凡二/x+1</td>
+                <td>15.1%</td>
+                <td>105级加成后19.2%</td>
+                <td>28000</td>
+            </tr>
+            <tr>
+                <td>超凡一/x ➫ 超凡二/x+2</td>
+                <td>2.5%</td>
+                <td>105级加成后3.2%</td>
+                <td>28000</td>
+            </tr>
+
+            <tr>
+                <td>超凡二/x ➫ 超凡三/x</td>
+                <td>5.0%</td>
+                <td>115级加成后6.4%</td>
+                <td>32000</td>
+            </tr>
+            <tr>
+                <td>超凡二/x ➫ 超凡三/x+1</td>
+                <td>17.6%</td>
+                <td>115级加成后22.4%</td>
+                <td>32000</td>
+            </tr>
+            <tr>
+                <td>超凡二/x ➫ 超凡三/x+2</td>
+                <td>2.5%</td>
+                <td>115级加成后3.2%</td>
+                <td>32000</td>
+            </tr>
+
+            <tr>
+                <td>超凡三/x ➫ 超凡三/x+1</td>
+                <td>25.7%</td>
+                <td>固定概率</td>
+                <td>40000</td>
+            </tr>
+            <tr>
+                <td>超凡三/x ➫ 超凡三/x+2</td>
+                <td>2.9%</td>
+                <td>固定概率</td>
+                <td>40000</td>
+            </tr>
+            <tr>
+                <td>超凡三/9 ➫ 元素切换</td>
+                <td>12.8%</td>
+                <td>亲和石加成28.5%</td>
+                <td>40000</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="info">
+        <p>说明： “x”表示当前品阶的变量，代表具体等级编号，x最低为0，最高为9</p>
+    </div>
+
+    <div class="flow-footer">
+      <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+      <div class="flow-line">© 2026 起源联盟 版权所有</div>
+      <div class="flow-line">
+        <a href="https://beian.miit.gov.cn/" target="_blank">
+          <img src="foot-icp.png" alt="备案">
+          浙ICP备2026025846号-1
+        </a>
+      </div>
+      <div class="flow-line">
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+          <img src="foot-gongan.png" alt="公安备案">
+          浙公网安备33052202000916号
+        </a>
+      </div>
+    </div>
+
+    <div class="btn-group">
+        <a href="4.html" class="btn">攻略大全</a>
+        <a href="/" class="btn">返回首页</a>
+    </div>
+
+</body>
+</html>
