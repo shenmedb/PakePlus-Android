@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联盟活动报名</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#000;color:#fff;padding:30px 20px}
+.container{max-width:600px;margin:0 auto}
+h1{color:#ffcc00;text-align:center;margin-bottom:30px}
+.form-item{margin-bottom:22px}
+.form-item label{display:block;color:#ffcc00;margin-bottom:8px;font-size:16px}
+.form-item input,.form-item select{
+    width:100%;padding:15px;background:#1a1a1a;border:2px solid #ffcc00;
+    border-radius:8px;color:#fff;font-size:16px;outline:none
+}
+.submit-btn{width:100%;padding:16px;background:#ffcc00;color:#000;border:none;border-radius:8px;font-weight:bold;margin-top:10px}
+.btn-row{display:flex;gap:12px;margin:15px 0}
+.two-btn{flex:1;padding:14px;background:#333;color:#ffcc00;border:2px solid #ffcc00;border-radius:8px;cursor:pointer;text-align:center}
+.back-btn{width:100%;padding:16px;background:#333;color:#ffcc00;border:2px solid #ffcc00;border-radius:8px;cursor-pointer}
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center}
+.modal-box{background:#1a1a1a;border:3px solid #ffcc00;padding:30px;border-radius:16px;text-align:center;width:90%;max-width:400px}
+.code-text{font-size:30px;color:#ffcc00;margin:20px 0}
+.modal-btn{padding:10px 20px;background:#ffcc00;color:#000;border:none;border-radius:8px;margin-top:10px}
+
+.tip-modal{
+    position: fixed;
+    top: 0;left: 0;right: 0;bottom: 0;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+.tip-box{
+    background: #1a1a1a;
+    border: 3px solid #ffcc00;
+    border-radius: 12px;
+    padding: 40px 30px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+}
+.tip-text{
+    color: #ffcc00;
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+.tip-btn{
+    padding: 12px 35px;
+    background: #ffcc00;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.flow-footer {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 30px;
+  padding-bottom: 10px;
+  line-height: 1.4;
+}
+.flow-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.flow-line a {
+  color: #fff !important;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.flow-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>联盟活动报名</h1>
+    <form id="form">
+        <div class="form-item">
+            <label>所属联盟</label>
+            <input name="alliance" required>
+        </div>
+        <div class="form-item">
+            <label>游戏昵称</label>
+            <input name="gameName" required>
+        </div>
+        <div class="form-item">
+            <label>微信昵称</label>
+            <input name="wechatName" required>
+        </div>
+        <div class="form-item">
+            <label>报名活动</label>
+            <select name="activity" required>
+                <option value="">请选择</option>
+                <option value="套马比赛">套马比赛</option>
+                <option value="众筹幻凯">众筹幻凯</option>
+            </select>
+        </div>
+
+        <button class="submit-btn" type="submit">提交报名</button>
+
+        <div class="btn-row">
+            <button type="button" class="two-btn" onclick="location.href='taoma.html'">套马比赛</button>
+            <button type="button" class="two-btn" onclick="location.href='zhongchou.html'">众筹幻凯</button>
+        </div>
+
+        <button class="back-btn" type="button" onclick="location.href='../index.html'">返回主页</button>
+    </form>
+
+    <div class="flow-footer">
+      <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+      <div class="flow-line">© 2026 起源联盟版权所有</div>
+      <div class="flow-line">
+        <a href="https://beian.miit.gov.cn/" target="_blank">
+          <img src="foot-icp.png" alt="备案">
+          浙ICP备2026025846号-1
+        </a>
+      </div>
+      <div class="flow-line">
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+          <img src="foot-gongan.png" alt="公安备案">
+          浙公网安备33052202000916号
+        </a>
+      </div>
+    </div>
+
+</div>
+
+<div class="modal" id="successModal">
+    <div class="modal-box">
+        <div>报名成功.请牢记唯一编码</div>
+        <div class="code-text" id="code"></div>
+        <button class="modal-btn" onclick="closeSuccessModal()">确定</button>
+    </div>
+</div>
+
+<div class="tip-modal" id="commonTipModal">
+    <div class="tip-box">
+        <div class="tip-text" id="tipContent"></div>
+        <button class="tip-btn" onclick="closeTipModal()">确定</button>
+    </div>
+</div>
+
+<script>
+const form = document.getElementById('form');
+const successModal = document.getElementById('successModal');
+const commonTipModal = document.getElementById('commonTipModal');
+const code = document.getElementById('code');
+const tipContent = document.getElementById('tipContent');
+let submitting = false;
+
+function closeSuccessModal(){
+    successModal.style.display='none';
+    form.reset();
+    submitting = false;
+}
+
+function closeTipModal(){
+    commonTipModal.style.display='none';
+    form.reset();
+    submitting = false;
+}
+
+form.onsubmit = async e => {
+    e.preventDefault();
+    if (submitting) return;
+    submitting = true;
+
+    const fd = new FormData(form);
+    const res = await fetch('./submit.php', { method:'POST', body:fd });
+    const backText = await res.text();
+
+    if (backText.startsWith('tm')) {
+        code.innerText = backText;
+        successModal.style.display = 'flex';
+    } 
+
+    else if (backText.trim() === "") {
+        tipContent.innerText = "众筹幻凯报名成功！";
+        commonTipModal.style.display = 'flex';
+    } 
+
+    else {
+        tipContent.innerText = backText;
+        commonTipModal.style.display = 'flex';
+    }
+}
+</script>
+</body>
+</html>
