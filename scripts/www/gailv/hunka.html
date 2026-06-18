@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>魂卡词条洗练概率公示</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    background:#111;color:#eee;
+    padding:15px;
+    padding-bottom:85px;
+    font-family:system-ui, sans-serif;line-height:1.7
+}
+.main{max-width:700px;margin:0 auto}
+h1{
+    text-align:center;color:#ffcc00;
+    margin:20px 0 30px;font-size:24px
+}
+h2{
+    color:#ff9900;margin:25px 0 12px;
+    font-size:18px;border-left:4px solid #ff9900;padding-left:10px
+}
+h3{
+    color:#ffcc66;margin:15px 0 8px;font-size:16px
+}
+p{margin-bottom:10px}
+.box{
+    background:#1a1a1a;border-radius:10px;
+    padding:15px;margin-bottom:12px
+}
+.table-wrap{overflow-x:auto;margin:10px 0}
+table{
+    width:100%;border-collapse:collapse;
+    background:#1a1a1a;border-radius:8px;overflow:hidden
+}
+th,td{
+    border:1px solid #333;padding:8px;text-align:center;font-size:13px
+}
+th{background:#252525;color:#ffcc00}
+td{color:#ddd}
+.tip{
+    background:#222;color:#ccc;padding:14px;border-radius:8px;margin:15px 0
+}
+.foot{
+    text-align:center;color:#777;font-size:13px;margin:40px 0 20px;line-height:1.6
+}
+.btn-group{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    padding: 12px 15px;
+    background: #111;
+    z-index: 999;
+    margin: 0;
+}
+.btn{
+    flex:1;background:#222;color:#ffcc00;
+    text-align:center;padding:14px;border-radius:8px;text-decoration:none
+}
+.btn:hover{background:#2c2c2c}
+
+.flow-footer {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 30px;
+  padding-bottom: 10px;
+  line-height: 1.4;
+}
+.flow-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.flow-line a {
+  color: #fff !important;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.flow-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+</style>
+</head>
+<body>
+<div class="main">
+
+<h1>魂卡词条洗练概率公示</h1>
+
+<h2>一、普通词条洗练概率</h2>
+<div class="table-wrap">
+<table>
+<tr>
+<th>词条类型</th>
+<th>词条&概率</th>
+<th>元素伤害&概率</th>
+<th>核心属性&概率</th>
+</tr>
+<tr>
+<td>火属性攻击卡</td>
+<td>吸血/反击/连击/闪避/暴击/击晕 各11.54%</td>
+<td>火/冰元素伤害 各3.85%</td>
+<td>元素攻击 23.06%</td>
+</tr>
+<tr>
+<td>冰属性攻击卡</td>
+<td>吸血/反击/连击/闪避/暴击/击晕 各11.54%</td>
+<td>冰/元元素伤害 各3.85%</td>
+<td>元素攻击 23.06%</td>
+</tr>
+<tr>
+<td>岩属性攻击卡</td>
+<td>吸血/反击/连击/闪避/暴击/击晕 各11.54%</td>
+<td>岩/雷元素伤害 各3.85%</td>
+<td>元素攻击 23.06%</td>
+</tr>
+<tr>
+<td>雷属性攻击卡</td>
+<td>吸血/反击/连击/闪避/暴击/击晕 各11.54%</td>
+<td>火/雷元素伤害 各3.85%</td>
+<td>元素攻击 23.06%</td>
+</tr>
+<tr>
+<td>火属性防御卡</td>
+<td>吸血抗性/反击抗性/连击抗性/闪避抗性/暴击抗性/击晕抗性 各11.54%</td>
+<td>火/冰元素伤害 各3.85%</td>
+<td>元素防御 23.06%</td>
+</tr>
+<tr>
+<td>冰属性防御卡</td>
+<td>吸血抗性/反击抗性/连击抗性/闪避抗性/暴击抗性/击晕抗性 各11.54%</td>
+<td>岩/冰元素伤害 各3.85%</td>
+<td>元素防御 23.06%</td>
+</tr>
+<tr>
+<td>岩属性防御卡</td>
+<td>吸血抗性/反击抗性/连击抗性/闪避抗性/暴击抗性/击晕抗性 各11.54%</td>
+<td>岩/雷元素伤害 各3.85%</td>
+<td>元素防御 23.06%</td>
+</tr>
+<tr>
+<td>雷属性防御卡</td>
+<td>吸血抗性/反击抗性/连击抗性/闪避抗性/暴击抗性/击晕抗性 各11.54%</td>
+<td>火/雷元素伤害 各3.85%</td>
+<td>元素防御 23.06%</td>
+</tr>
+<tr>
+<td>火属性生命卡</td>
+<td>坚毅/威吓/恢复/重伤 各13.64%</td>
+<td>全元素增幅 9.09%</td>
+<td>全元素抗性9.09%｜生命27.26%</td>
+</tr>
+<tr>
+<td>冰属性生命卡</td>
+<td>暴伤/重伤/威吓/减疗 各13.64%</td>
+<td>全元素增幅 9.09%</td>
+<td>全元素抗性9.09%｜生命27.26%</td>
+</tr>
+<tr>
+<td>岩属性生命卡</td>
+<td>暴伤/坚毅/恢复/重伤 各13.64%</td>
+<td>全元素增幅 9.09%</td>
+<td>全元素抗性9.09%｜生命27.26%</td>
+</tr>
+<tr>
+<td>雷属性生命卡</td>
+<td>坚毅/威吓/减疗/恢复 各13.64%</td>
+<td>全元素增幅 9.09%</td>
+<td>全元素抗性9.09%｜生命27.26%</td>
+</tr>
+</table>
+</div>
+
+<h2>二、橙品及以下 觉醒词条洗练概率</h2>
+<div class="table-wrap">
+<table>
+<tr>
+<th>词条类型</th>
+<th>元素伤害&概率</th>
+<th>元素增幅/抗性&概率</th>
+<th>生命增幅&概率</th>
+</tr>
+<tr>
+<td>火属性攻击卡</td>
+<td>火/冰元素伤害 各23%</td>
+<td>火/冰元素增幅 各23%</td>
+<td>全元素增幅8.00%</td>
+</tr>
+<tr>
+<td>冰属性攻击卡</td>
+<td>冰/元元素伤害 各23%</td>
+<td>岩/冰元素增幅 各23%</td>
+<td>全元素增幅8.00%</td>
+</tr>
+<tr>
+<td>岩属性攻击卡</td>
+<td>岩/雷元素伤害 各23%</td>
+<td>岩/雷元素增幅 各23%</td>
+<td>全元素增幅8.00%</td>
+</tr>
+<tr>
+<td>雷属性攻击卡</td>
+<td>火/雷元素伤害 各23%</td>
+<td>火/雷元素增幅 各23%</td>
+<td>全元素增幅8.00%</td>
+</tr>
+<tr>
+<td>火属性防御卡</td>
+<td>火/冰元素伤害 各23%</td>
+<td>火/冰元素抗性 各23%</td>
+<td>全元素抗性8.00%</td>
+</tr>
+<tr>
+<td>冰属性防御卡</td>
+<td>岩/冰元素伤害 各23%</td>
+<td>岩/冰元素抗性 各23%</td>
+<td>全元素抗性8.00%</td>
+</tr>
+<tr>
+<td>岩属性防御卡</td>
+<td>岩/雷元素伤害 各23%</td>
+<td>岩/雷元素抗性 各23%</td>
+<td>全元素抗性8.00%</td>
+</tr>
+<tr>
+<td>雷属性防御卡</td>
+<td>火/雷元素伤害 各23%</td>
+<td>火/雷元素抗性 各23%</td>
+<td>全元素抗性8.00%</td>
+</tr>
+<tr>
+<td>火属性生命卡</td>
+<td>火伤害增幅15.00%｜冰伤害抗性15.00%</td>
+<td>暴伤/坚毅/恢复/重伤 各15%</td>
+<td>全元素增幅5.00%｜全元素抗性5.00%</td>
+</tr>
+<tr>
+<td>冰属性生命卡</td>
+<td>冰伤害增幅15.00%｜岩伤害抗性15.00%</td>
+<td>暴伤/威吓/减疗/恢复 各15%</td>
+<td>全元素增幅5.00%｜全元素抗性5.00%</td>
+</tr>
+<tr>
+<td>岩属性生命卡</td>
+<td>岩伤害增幅15.00%｜火伤害抗性15.00%</td>
+<td>暴伤/坚毅/减疗/重伤 各15%</td>
+<td>全元素增幅5.00%｜全元素抗性5.00%</td>
+</tr>
+<tr>
+<td>雷属性生命卡</td>
+<td>雷伤害增幅15.00%｜火伤害抗性15.00%</td>
+<td>坚毅/威吓/减疗/恢复 各15%</td>
+<td>全元素增幅5.00%｜全元素抗性5.00%</td>
+</tr>
+</table>
+</div>
+
+<h2>三、红品 觉醒词条洗练概率</h2>
+<div class="table-wrap">
+<table>
+<tr>
+<th>词条类型</th>
+<th>伤害&抗性&概率</th>
+<th>增幅/抗性&概率</th>
+<th>基础词条&概率</th>
+</tr>
+<tr>
+<td>火属性攻击卡</td>
+<td>火伤害伤害10.00%｜火伤害增幅10.00%</td>
+<td>全元素增幅5.00%</td>
+<td>吸血/反击/连击/闪避/暴击/击晕 各12.5%</td>
+</tr>
+<tr>
+<td>冰属性攻击卡</td>
+<td>冰伤害伤害10.00%｜冰伤害增幅10.00%</td>
+<td>全元素增幅5.00%</td>
+<td>吸血/反击/连击/闪避/暴击/击晕 各12.5%</td>
+</tr>
+<tr>
+<td>岩属性攻击卡</td>
+<td>岩伤害伤害10.00%｜岩伤害增幅10.00%</td>
+<td>全元素增幅5.00%</td>
+<td>吸血/反击/连击/闪避/暴击/击晕 各12.5%</td>
+</tr>
+<tr>
+<td>雷属性攻击卡</td>
+<td>雷伤害伤害10.00%｜雷伤害增幅10.00%</td>
+<td>全元素增幅5.00%</td>
+<td>吸血/反击/连击/闪避/暴击/击晕 各12.5%</td>
+</tr>
+<tr>
+<td>火属性防御卡</td>
+<td>火伤害伤害10.00%｜火伤害抗性10.00%</td>
+<td>全元素抗性5.00%</td>
+<td>吸血抗性/反击抗性/连击抗性/闪避抗性/暴击抗性/击晕抗性 各12.5%</td>
+</tr>
+<tr>
+<td>冰属性防御卡</td>
+<td>冰伤害伤害10.00%｜冰伤害抗性10.00%</td>
+<td>全元素抗性5.00%</td>
+<td>吸血抗性/反击抗性/连击抗性/闪避抗性/暴击抗性/击晕抗性 各12.5%</td>
+</tr>
+<tr>
+<td>岩属性防御卡</td>
+<td>岩伤害伤害10.00%｜岩伤害抗性10.00%</td>
+<td>全元素抗性5.00%</td>
+<td>吸血抗性/反击抗性/连击抗性/闪避抗性/暴击抗性/击晕抗性 各12.5%</td>
+</tr>
+<tr>
+<td>雷属性防御卡</td>
+<td>雷伤害伤害10.00%｜雷伤害抗性10.00%</td>
+<td>全元素抗性5.00%</td>
+<td>吸血抗性/反击抗性/连击抗性/闪避抗性/暴击抗性/击晕抗性 各12.5%</td>
+</tr>
+<tr>
+<td>火属性生命卡</td>
+<td>火伤害增幅15.00%｜冰伤害抗性15.00%</td>
+<td>暴伤/威吓/减疗/恢复 各15%</td>
+<td>全元素增幅5.00%｜全元素抗性5.00%</td>
+</tr>
+<tr>
+<td>冰属性生命卡</td>
+<td>冰伤害增幅15.00%｜岩伤害抗性15.00%</td>
+<td>暴伤/威吓/减疗/恢复 各15%</td>
+<td>全元素增幅5.00%｜全元素抗性5.00%</td>
+</tr>
+<tr>
+<td>岩属性生命卡</td>
+<td>岩伤害增幅15.00%｜岩伤害抗性15.00%</td>
+<td>坚毅/威吓/减疗/重伤 各15%</td>
+<td>全元素增幅5.00%｜全元素抗性5.00%</td>
+</tr>
+<tr>
+<td>雷属性生命卡</td>
+<td>雷伤害增幅15.00%｜火伤害抗性15.00%</td>
+<td>坚毅/威吓/减疗/恢复 各15%</td>
+<td>全元素增幅5.00%｜全元素抗性5.00%</td>
+</tr>
+</table>
+</div>
+
+<div class="tip">
+💡 洗练机制说明：<br>
+1. 词条分为**普通词条、橙品及以下觉醒词条、红品觉醒词条**三类，红品词条属性上限更高；<br>
+2. 攻击卡侧重输出词条，防御卡侧重抗性词条，生命卡侧重生存与功能词条；<br>
+3. 概率为基础洗练概率，无额外属性加成。
+</div>
+
+</div>
+
+<div class="flow-footer">
+  <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+  <div class="flow-line">© 2026 起源联盟 版权所有</div>
+  <div class="flow-line">
+    <a href="https://beian.miit.gov.cn/" target="_blank">
+      <img src="foot-icp.png" alt="备案">
+      浙ICP备2026025846号-1
+    </a>
+  </div>
+  <div class="flow-line">
+    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+      <img src="foot-gongan.png" alt="公安备案">
+      浙公网安备33052202000916号
+    </a>
+  </div>
+</div>
+
+<div class="btn-group">
+<a href="gailv.html" class="btn">概率大全</a>
+<a href="/" class="btn">返回首页</a>
+</div>
+
+</body>
+</html>
