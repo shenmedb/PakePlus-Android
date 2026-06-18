@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>起源联盟 - 留下脚印留言板</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+body {
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+}
+.page-title {
+    font-size: 2rem;
+    color: #ffcc00;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.rule-container {
+    background-color: #1a1a1a;
+    border-radius: 16px;
+    padding: 25px;
+    width: 100%;
+    max-width: 550px;
+    border: 1px solid #333;
+    margin-bottom: 25px;
+}
+.form-item {
+    margin-bottom: 18px;
+}
+.form-item label {
+    display: block;
+    color: #ffcc00;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+.form-item input,
+.form-item textarea {
+    width: 100%;
+    padding: 12px;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+}
+.form-item textarea {
+    min-height: 120px;
+    resize: none;
+}
+.btn-box {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+.btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.submit-btn {
+    background: #ffcc00;
+    color: #000;
+}
+.back-btn {
+    background: #333;
+    color: #fff;
+}
+.show-btn {
+    background: #2a2a2a;
+    color: #ffcc00;
+    border: 1px solid #ffcc00;
+}
+
+.flow-footer {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 30px;
+  padding-bottom: 10px;
+  line-height: 1.4;
+}
+.flow-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.flow-line a {
+  color: #fff !important;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.flow-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<h1 class="page-title">留下脚印 · 提交留言</h1>
+<div class="rule-container">
+    <form id="msgForm">
+        <div class="form-item">
+            <label>游戏名字</label>
+            <input type="text" name="name" id="nickname" placeholder="请输入游戏昵称" required>
+        </div>
+
+        <div class="form-item" id="adminPwdBox" style="display:none;">
+            <label>管理员密码</label>
+            <input type="password" name="adminpwd" placeholder="包含管理员昵称，请输入密码">
+        </div>
+
+        <div class="form-item">
+            <label>区服</label>
+            <input type="text" name="qufu" placeholder="请输入游戏区服" required>
+        </div>
+        <div class="form-item">
+            <label>游戏联盟</label>
+            <input type="text" name="lianmeng" placeholder="请输入所在联盟" required>
+        </div>
+        <div class="form-item">
+            <label>留言内容</label>
+            <textarea name="msg" placeholder="写下你的留言..." required></textarea>
+        </div>
+
+        <div class="btn-box">
+            <button class="btn submit-btn" type="submit">提交留言</button>
+            <button class="btn back-btn" type="button" onclick="location.href='../index.html'">返回主页</button>
+        </div>
+    </form>
+
+    <div class="btn-box" style="margin-top:12px;">
+        <button class="btn show-btn" onclick="location.href='zs.php'">全服留言板</button>
+    </div>
+</div>
+
+<div class="flow-footer">
+  <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+  <div class="flow-line">© 2026 起源联盟 版权所有</div>
+  <div class="flow-line">
+    <a href="https://beian.miit.gov.cn/" target="_blank">
+      <img src="foot-icp.png" alt="备案">
+      浙ICP备2026025846号-1
+    </a>
+  </div>
+  <div class="flow-line">
+    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+      <img src="foot-gongan.png" alt="公安备案">
+      浙公网安备33052202000916号
+    </a>
+  </div>
+</div>
+
+<script>
+document.getElementById('msgForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var name = document.getElementById('nickname').value.trim();
+    var pwd = this.adminpwd.value;
+
+    if(name.includes("幕后主使") && pwd !== "6605749"){
+        alert("昵称包含管理员关键词，请输入正确密码！");
+        return;
+    }
+
+    var formData = new FormData(this);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'submit.php', true);
+    
+    xhr.onload = function() {
+        alert('留言提交成功！');
+        document.getElementById('msgForm').reset();
+        document.getElementById('adminPwdBox').style.display = "none";
+    };
+    xhr.onerror = function() {
+        alert('留言提交成功！');
+        document.getElementById('msgForm').reset();
+        document.getElementById('adminPwdBox').style.display = "none";
+    };
+
+    xhr.send(formData);
+});
+
+document.getElementById('nickname').addEventListener('input', function(){
+    var box = document.getElementById('adminPwdBox');
+    box.style.display = this.value.trim().includes("幕后主使") ? "block" : "none";
+});
+</script>
+
+</body>
+</html>
