@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联盟公告</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background: #000 !important;
+    color: #fff;
+    font-family: "Microsoft YaHei", sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.back-btn {
+    position: fixed;
+    left: 20px;
+    bottom: 10px;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1.5px solid #ffdd40;
+    color: #ffdd40;
+    padding: 11px 20px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 99;
+}
+
+.title {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #ffdd40;
+    text-shadow: 0 0 10px rgba(255, 221, 64, 0.5);
+}
+
+.notice-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.notice-title {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.notice-title::before {
+    content: "📢";
+}
+
+.notice-content {
+    color: #ccc;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.notice-time {
+    margin-top: 12px;
+    font-size: 12px;
+    color: #888;
+    text-align: right;
+}
+
+.bottom-bar {
+    color:#fff; 
+    text-align:center; 
+    font-size:12px;
+    margin-top: auto;
+    padding: 20px 0;
+}
+
+.flow-footer {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 20px;
+}
+.flow-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flow-line a {
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.flow-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+    <h1 class="title">联盟官方公告</h1>
+
+    <div class="notice-card">
+        <div class="notice-title">联盟活动获奖展示</div>
+        <div class="notice-content">
+            【起源联盟】第二届联盟活动圆满收官！<br>
+起源与混源城的兄弟们，感谢全员热情参与！<br>
+抽奖、套马、幻凯全部安排到位，尽兴收官，期待下次再聚再战，不见不散！<br><br>
+
+🎁 抽奖获奖者<br>
+老K、起源🫵梁木、混沌⚔初心<br><br>
+
+🏆 套马比赛胜者<br>
+第一名：起源🫵小月<br>
+第二名：混沌⚔克克<br>
+第三名：起源🫵伍月<br><br>
+
+⚔️ 众筹幻凯获得者<br>
+起源🫵！<br><br>
+
+恭喜以上所有获奖玩家！好运爆棚，实力上岸，下次活动继续冲冲冲！
+        </div>
+        <div class="notice-time">2026-04-14 发布</div>
+    </div>
+
+    <div class="notice-card">
+        <div class="notice-title">高光时刻照片墙上线</div>
+        <div class="notice-content">
+            联盟全新「高光时刻」照片墙已正式上线，支持自动滚动、手动滑动、全屏查看，欢迎大家上传精彩瞬间，展示联盟风采！
+        </div>
+        <div class="notice-time">2026-04-14 发布</div>
+    </div>
+
+    <div class="notice-card">
+        <div class="notice-title">联盟内部规则更新</div>
+        <div class="notice-content">
+            1. 禁止刷屏辱骂他人；<br>
+            2. 每周固定组织活动；<br>
+            3. 积极参加海岛活动。
+        </div>
+        <div class="notice-time">2026-04-13 发布</div>
+    </div>
+
+    <button class="back-btn" onclick="location.href='./'">返回主页</button>
+
+<div class="flow-footer">
+  <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+  <div class="flow-line">© 2026 起源联盟 版权所有</div>
+  <div class="flow-line">
+    <a href="https://beian.miit.gov.cn/" target="_blank">
+      <img src="foot-icp.png" alt="备案图标">
+      浙ICP备2026025846号-1
+    </a>
+  </div>
+  <div class="flow-line">
+    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+      <img src="foot-gongan.png" alt="公安备案图标">
+      浙公网安备33052202000916号
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
