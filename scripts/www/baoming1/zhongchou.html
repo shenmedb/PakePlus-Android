@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>众筹幻凯报名名单</title>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family: sans-serif;}
+    body{background:#000;color:#fff;padding:30px 20px;}
+    .container{max-width:600px;margin:0 auto;}
+    h1{color:#ffcc00;text-align:center;margin-bottom:20px;}
+    .card{
+        background:#1a1a1a;
+        padding:25px;
+        border-radius:16px;
+        max-height: 500px;
+        overflow-y: auto;
+    }
+    .card::-webkit-scrollbar {
+        width: 6px;
+    }
+    .card::-webkit-scrollbar-thumb {
+        background: #ffcc00;
+        border-radius: 3px;
+    }
+    .item{padding:14px 0;border-bottom:1px solid #333;line-height:1.6}
+    .label{color:#ffcc00;font-weight:bold;display:inline-block;width:90px;}
+    .back{width:100%;padding:14px;background:#333;color:#ffcc00;border:1px solid #ffcc00;border-radius:8px;margin-top:20px;cursor:pointer;}
+
+.flow-footer {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 30px;
+  padding-bottom: 10px;
+  line-height: 1.4;
+}
+.flow-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.flow-line a {
+  color: #fff !important;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.flow-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>众筹幻凯报名名单</h1>
+    <div class="card" id="list-box">加载中...</div>
+    <button class="back" onclick="location.href='baoming.html'">返回报名</button>
+
+    <div class="flow-footer">
+      <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+      <div class="flow-line">© 2026 起源联盟 版权所有</div>
+      <div class="flow-line">
+        <a href="https://beian.miit.gov.cn/" target="_blank">
+          <img src="foot-icp.png" alt="备案">
+          浙ICP备2026025846号-1
+        </a>
+      </div>
+      <div class="flow-line">
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+          <img src="foot-gongan.png" alt="公安备案">
+         浙公网安备33052202000916号
+        </a>
+      </div>
+    </div>
+
+</div>
+
+<script>
+fetch('./data.json')
+.then(res => res.json())
+.then(data => {
+    const box = document.getElementById('list-box');
+    box.innerHTML = '';
+    let has = false;
+
+    data.forEach(item => {
+        if (item.activity == '众筹幻凯') {
+            has = true;
+            box.innerHTML += `
+            <div class="item">
+                <span class="label">联盟：</span>${item.alliance}<br>
+                <span class="label">游戏昵称：</span>${item.gameName}<br>
+                <span class="label">微信昵称：</span>${item.wechatName}<br>
+                <span class="label">报名时间：</span>${item.time}
+            </div>
+            `;
+        }
+    });
+
+    if (!has) {
+        box.innerHTML = "<p style='text-align:center;padding:20px;color:#999'>暂无众筹幻凯报名记录</p>";
+    }
+})
+.catch(e => {
+    document.getElementById('list-box').innerHTML = "<p style='text-align:center;padding:20px;color:#999'>暂无报名记录</p>";
+})
+</script>
+</body>
+</html>
