@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>活动报名协议须知</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+body {
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+}
+.page-title {
+    font-size: 2rem;
+    color: #ffcc00;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.rule-container {
+    background-color: #1a1a1a;
+    border-radius: 16px;
+    padding: 25px;
+    width: 100%;
+    max-width: 550px;
+    border: 1px solid #333;
+    margin-bottom: 25px;
+    /* 已取消高度限制和滚动条 */
+}
+.rule-item {
+    margin-bottom: 20px;
+}
+.rule-item h3 {
+    color: #ffcc00;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    border-left: 4px solid #ffcc00;
+    padding-left: 10px;
+}
+.rule-content {
+    color: #eee;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.rule-content p {
+    margin-bottom: 8px;
+}
+.check-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 25px 0;
+}
+.check-group input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+.check-group label {
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+}
+.btn-box {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+.btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.agree-btn {
+    background: #ffcc00;
+    color: #000;
+}
+.refuse-btn {
+    background: #333;
+    color: #fff;
+}
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.flow-footer {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 30px;
+  padding-bottom: 10px;
+  line-height: 1.4;
+}
+.flow-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.flow-line a {
+  color: #fff !important;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.flow-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<h1 class="page-title">活动报名须知</h1>
+<div class="rule-container">
+    <div class="rule-item">
+        <h3>一、活动报名规则</h3>
+        <div class="rule-content">
+            <p>1. 本活动仅限起源联盟内部成员参与，报名时请填写真实有效的游戏与微信信息。</p>
+            <p>2. 每位成员仅限报名一次，信息提交后不可修改，重复报名以最后一次提交为准。</p>
+            <p>3. 报名信息将用于活动组织与通知，联盟会严格保护你的个人信息，不会对外泄露。</p>
+            <p>4. 活动名额有限，报名成功后请按时参与，无故缺席将影响后续活动参与资格。</p>
+        </div>
+    </div>
+
+    <div class="rule-item">
+        <h3>二、活动参与须知</h3>
+        <div class="rule-content">
+            <p>1. 活动期间请遵守联盟规则与游戏秩序，严禁使用外挂、脚本等违规工具。</p>
+            <p>2. 活动奖励将在活动结束后由管理员统一统计发放，请耐心等待。</p>
+            <p>3. 如因个人原因无法参与活动，请提前联系管理员说明情况。</p>
+            <p>4. 活动最终解释权归起源联盟所有，联盟有权根据实际情况调整活动安排。</p>
+        </div>
+    </div>
+
+    <div class="rule-item">
+        <h3>三、免责声明</h3>
+        <div class="rule-content">
+            <p>1. 本活动为联盟内部娱乐交流活动，非官方活动，不涉及任何商业用途。</p>
+            <p>2. 因个人信息填写错误、网络问题或设备异常导致报名失败，联盟概不负责。</p>
+            <p>3. 参与者自愿报名本次活动，已知晓并接受活动相关规则与风险。</p>
+            <p>4. 如遇不可抗力因素，联盟有权暂停或终止活动，无需另行通知。</p>
+        </div>
+    </div>
+
+    <div class="check-group">
+        <input type="checkbox" id="agreeCheck">
+        <label for="agreeCheck">我已仔细阅读并同意以上活动规则、须知及免责声明</label>
+    </div>
+
+    <div class="btn-box">
+        <button class="btn agree-btn" id="enterBtn" disabled>同意并进入报名</button>
+        <button class="btn refuse-btn" id="closeBtn">不同意返回主页</button>
+    </div>
+</div>
+
+<div class="flow-footer">
+  <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+  <div class="flow-line">© 2026 起源联盟 版权所有</div>
+  <div class="flow-line">
+    <a href="https://beian.miit.gov.cn/" target="_blank">
+      <img src="foot-icp.png" alt="备案">
+      浙ICP备2026025846号-1
+    </a>
+  </div>
+  <div class="flow-line">
+    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+      <img src="foot-gongan.png" alt="公安备案">
+      浙公网安备33052202000916号
+    </a>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const agreeCheck = document.getElementById('agreeCheck');
+    const enterBtn = document.getElementById('enterBtn');
+    const closeBtn = document.getElementById('closeBtn');
+
+    agreeCheck.addEventListener('change', function() {
+        enterBtn.disabled = !this.checked;
+    });
+
+    enterBtn.onclick = function() {
+        location.href = 'baoming.html';
+    };
+
+    closeBtn.onclick = function() {
+        location.href = '../index.html';
+    };
+});
+</script>
+
+</body>
+</html>
