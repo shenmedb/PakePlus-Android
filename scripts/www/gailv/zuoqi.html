@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>坐骑升级属性变化概率</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    background:#111;color:#eee;
+    padding:15px;
+    padding-bottom:85px;
+    font-family:system-ui, sans-serif;line-height:1.7
+}
+.main{max-width:700px;margin:0 auto}
+h1{
+    text-align:center;color:#ffcc00;
+    margin:20px 0 30px;font-size:24px
+}
+h2{
+    color:#ff9900;margin:25px 0 12px;
+    font-size:18px;border-left:4px solid #ff9900;padding-left:10px
+}
+h3{
+    color:#ffcc66;margin:15px 0 8px;font-size:16px
+}
+p{margin-bottom:10px}
+.box{
+    background:#1a1a1a;border-radius:10px;
+    padding:15px;margin-bottom:12px
+}
+.table-wrap{overflow-x:auto;margin:10px 0}
+table{
+    width:100%;border-collapse:collapse;
+    background:#1a1a1a;border-radius:8px;overflow:hidden
+}
+th,td{
+    border:1px solid #333;padding:8px;text-align:center;font-size:13px
+}
+th{background:#252525;color:#ffcc00}
+td{color:#ddd}
+.tip{
+    background:#222;color:#ccc;padding:14px;border-radius:8px;margin:15px 0
+}
+.foot{
+    text-align:center;color:#777;font-size:13px;margin:40px 0 20px;line-height:1.6
+}
+.btn-group{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    padding: 12px 15px;
+    background: #111;
+    z-index: 999;
+    margin: 0;
+}
+.btn{
+    flex:1;background:#222;color:#ffcc00;
+    text-align:center;padding:14px;border-radius:8px;text-decoration:none
+}
+.btn:hover{background:#2c2c2c}
+
+.flow-footer {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 30px;
+  padding-bottom: 10px;
+  line-height: 1.4;
+}
+.flow-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.flow-line a {
+  color: #fff !important;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.flow-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+</style>
+</head>
+<body>
+<div class="main">
+
+<h1>坐骑升级属性变化概率公示</h1>
+
+<div class="box">
+<p>强化获得属性是坐骑主属性概率 <strong>【66.67%】</strong></p>
+<p>每次强化获得属性，区间内纯随机。具体区间如下。</p>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr>
+<th>品阶</th>
+<th>主属性区间</th>
+<th>副属性区间</th>
+</tr>
+<tr>
+<td>优秀</td>
+<td>1.00%~2.20%</td>
+<td>1.00%~2.20%</td>
+</tr>
+<tr>
+<td>精良</td>
+<td>1.00%~3.00%</td>
+<td>1.00%~2.20%</td>
+</tr>
+<tr>
+<td>稀有</td>
+<td>1.00%~3.00%</td>
+<td>1.00%~2.20%</td>
+</tr>
+<tr>
+<td>史诗</td>
+<td>1.00%~3.30%</td>
+<td>1.00%~2.20%</td>
+</tr>
+<tr>
+<td>完美</td>
+<td>1.00%~3.60%</td>
+<td>1.00%~2.20%</td>
+</tr>
+</table>
+</div>
+
+<div class="tip">
+💡 说明：<br>
+1. 主属性触发概率固定为66.67%，剩余为副属性；<br>
+2. 所有属性加成均为区间内纯随机数值；<br>
+3. 品阶越高，主属性可获得上限越高，副属性上限保持一致。
+</div>
+
+</div>
+
+<div class="flow-footer">
+  <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+  <div class="flow-line">© 2026 起源联盟 版权所有</div>
+  <div class="flow-line">
+    <a href="https://beian.miit.gov.cn/" target="_blank">
+      <img src="foot-icp.png" alt="备案">
+      浙ICP备2026025846号-1
+    </a>
+  </div>
+  <div class="flow-line">
+    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+      <img src="foot-gongan.png" alt="公安备案">
+      浙公网安备33052202000916号
+    </a>
+  </div>
+</div>
+
+<div class="btn-group">
+<a href="gailv.html" class="btn">概率大全</a>
+<a href="/" class="btn">返回首页</a>
+</div>
+
+</body>
+</html>
