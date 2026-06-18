@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  * {
+    margin:0; padding:0; box-sizing:border-box;
+    -webkit-user-select:none; user-select:none;
+    -webkit-user-drag:none; user-drag:none;
+    -webkit-touch-callout:none;
+  }
+
+  body {
+    background:#000;
+    min-height:100vh;
+    padding-bottom:120px;
+    overflow: hidden;
+  }
+
+  #particleCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .back-home {
+    position: fixed;
+    bottom: 10px;
+    left: 20px;
+    padding: 11px 20px;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(255,215,0,0.4);
+    color: #ffd700;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    z-index: 9999;
+  }
+
+.float-img {
+  position: absolute;
+  width: 26vw;
+  max-width: 110px;
+  min-height: 180px;
+  aspect-ratio: 9/16;
+  border: 2px solid #ffd700;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: grab;
+  z-index: 1;
+}
+
+.float-img img {
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events:none;
+}
+
+  .modal {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,.95);
+    display:none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+  }
+
+  .big-frame {
+    width: 90%;
+    max-width: 380px;
+    aspect-ratio: 9/16;
+    border: 4px solid #ffd700;
+    border-radius: 16px;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .big-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .img-mask {
+    position:absolute; inset:0; cursor:pointer; }
+
+  .footer {
+    position: fixed;
+    bottom:0; left:0; width:100%;
+    background:#000;
+    color:#aaa;
+    text-align:center;
+    padding:16px 10px;
+    font-size:14px;
+    z-index:100;
+  }
+
+.footer-fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 5px 0 calc(3px + env(safe-area-inset-bottom));
+  background: transparent;
+  z-index: 50;
+}
+.footer-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-line a {
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.footer-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particleCanvas"></canvas>
+
+<audio id="bgMusic" loop>
+  <source src="ggsk/gaoguang.mp3" type="audio/mp3"></audio>
+
+<a href="./" class="back-home">返回主页</a>
+
+<div class="modal" id="modal">
+  <div class="big-frame">
+    <img id="bigImg" src="">
+    <div class="img-mask" id="mask"></div>
+  </div>
+</div>
+
+<div class="footer-fixed">
+  <div class="footer-line">本站内容仅供娱乐交流使用，禁止商用</div>
+  <div class="footer-line">© 2026 起源联盟 版权所有</div>
+  <div class="footer-line">
+    <a href="https://beian.miit.gov.cn/" target="_blank">
+      <img src="foot-icp.png" alt="备案图标">
+      浙ICP备2026025846号-1
+    </a>
+  </div>
+  <div class="footer-line">
+    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+      <img src="foot-gongan.png" alt="公安备案图标">
+      浙公网安备33052202000916号
+    </a>
+  </div>
+</div>
+
+<script>
+  const canvas = document.getElementById("particleCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = [];
+  class Particle {
+    constructor(){
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 1.5 + 0.5;
+      this.speedX = Math.random() * 0.5 - 0.25;
+      this.speedY = Math.random() * 0.5 - 0.25;
+      this.color = "#ffd700";
+    }
+    update(){
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+      if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
+    draw(){
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function createParticles(){
+    for(let i=0;i<80;i++) particles.push(new Particle());
+  }
+  createParticles();
+
+  function animateParticles(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animateParticles);
+  }
+  animateParticles();
+
+  window.addEventListener("resize",()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  const bgMusic = document.getElementById("bgMusic");
+  let musicStarted = false;
+  function startMusic() {
+    if (musicStarted) return;
+    bgMusic.volume = 0.4;
+    bgMusic.play();
+    musicStarted = true;
+  }
+  document.addEventListener("click", startMusic);
+  document.addEventListener("touchstart", startMusic);
+
+const images = [
+  "ggsk/40.webp","ggsk/41.webp","ggsk/42.webp","ggsk/43.webp","ggsk/44.webp",
+  "ggsk/45.webp","ggsk/46.webp","ggsk/47.webp","ggsk/48.webp","ggsk/49.webp",
+  "ggsk/50.webp","ggsk/51.webp","ggsk/52.webp","ggsk/53.webp","ggsk/54.webp",
+  "ggsk/55.webp","ggsk/56.webp","ggsk/57.webp","ggsk/58.webp","ggsk/59.webp",
+  "ggsk/60.webp","ggsk/61.webp","ggsk/62.webp","ggsk/63.webp","ggsk/64.webp",
+  "ggsk/65.webp","ggsk/66.webp","ggsk/67.webp","ggsk/68.webp","ggsk/69.webp",
+  "ggsk/70.webp","ggsk/71.webp","ggsk/72.webp","ggsk/73.webp","ggsk/74.webp",
+  "ggsk/75.webp","ggsk/76.webp","ggsk/77.webp","ggsk/78.webp","ggsk/79.webp",
+  "ggsk/80.webp","ggsk/81.webp","ggsk/82.webp","ggsk/83.webp","ggsk/84.webp",
+  "ggsk/85.webp","ggsk/86.webp","ggsk/87.webp","ggsk/88.webp","ggsk/89.webp",
+  "ggsk/90.webp","ggsk/91.webp","ggsk/92.webp","ggsk/93.webp","ggsk/94.webp",
+  "ggsk/95.webp","ggsk/96.webp","ggsk/97.webp","ggsk/98.webp","ggsk/99.webp",
+  "ggsk/100.webp","ggsk/101.webp","ggsk/102.webp","ggsk/103.webp","ggsk/104.webp",
+  "ggsk/105.webp"
+];
+
+  let current = 0;
+
+  const BOTTOM_LIMIT = 65;
+
+  images.forEach((src, index) => {
+    const el = document.createElement("div");
+    el.className = "float-img";
+    el.innerHTML = `<img src="${src}">`;
+    document.body.appendChild(el);
+    let x = Math.random() * (window.innerWidth - 120);
+    let maxTop = window.innerHeight - BOTTOM_LIMIT - el.offsetHeight;
+    let y = Math.random() * maxTop;
+    el.style.left = x + "px";
+    el.style.top  = y + "px";
+
+    let vx = (Math.random() - 0.5) * 0.42;
+    let vy = (Math.random() - 0.5) * 0.42;
+
+    let startX, startY;
+    let dragged = false;
+
+    setInterval(() => {
+      let l = parseFloat(el.style.left);
+      let t = parseFloat(el.style.top);
+      let w = el.offsetWidth;
+      let h = el.offsetHeight;
+      
+      if (l <= 0 || l + w >= window.innerWidth) vx *= -1;
+      if (t <= 0 || t + h >= window.innerHeight - BOTTOM_LIMIT) vy *= -1;
+      
+      el.style.left = l + vx + "px";
+      el.style.top  = t + vy + "px";
+    }, 30);
+
+    el.addEventListener("mousedown", start);
+    el.addEventListener("touchstart", start, { passive: false });
+    document.addEventListener("mousemove", move);
+    document.addEventListener("touchmove", move, { passive: false });
+    document.addEventListener("mouseup", end);
+    document.addEventListener("touchend", end);
+
+    function start(e) {
+      let clientX = e.type.includes("touch") ? e.touches[0].clientX : e.clientX;
+      let clientY = e.type.includes("touch") ? e.touches[0].clientY : e.clientY;
+      startX = clientX; startY = clientY;
+      dragged = false;
+      el.dataset.active = "true";
+    }
+
+    function move(e) {
+      if (el.dataset.active !== "true") return;
+      let clientX = e.type.includes("touch") ? e.touches[0].clientX : e.clientX;
+      let clientY = e.type.includes("touch") ? e.touches[0].clientY : e.clientY;
+      let dx = Math.abs(clientX - startX);
+      let dy = Math.abs(clientY - startY);
+      if (dx > 10 || dy > 10) dragged = true;
+      if (dragged) {
+        let newLeft = clientX - el.offsetWidth/2;
+        let newTop = clientY - el.offsetHeight/2;
+        
+        newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - el.offsetWidth));
+        newTop = Math.max(0, Math.min(newTop, window.innerHeight - BOTTOM_LIMIT - el.offsetHeight));
+        
+        el.style.left = newLeft + "px";
+        el.style.top  = newTop + "px";
+        e.preventDefault();
+      }
+    }
+
+    function end() {
+      if (el.dataset.active !== "true") return;
+      if (!dragged) {
+        current = index;
+        document.getElementById("bigImg").src = src;
+        document.getElementById("modal").style.display = "flex";
+      }
+      el.dataset.active = "false";
+      dragged = false;
+    }
+  });
+
+  document.getElementById("mask").addEventListener("click", () => {
+    document.getElementById("modal").style.display = "none";
+  });
+
+  let sx = 0;
+  document.getElementById("mask").addEventListener("touchstart", (e) => {
+    sx = e.touches[0].clientX;
+  });
+  document.getElementById("mask").addEventListener("touchend", (e) => {
+    const d = e.changedTouches[0].clientX - sx;
+    if (Math.abs(d) < 40) return;
+    current = d > 0 ? Math.max(0, current-1) : Math.min(images.length-1, current+1);
+    document.getElementById("bigImg").src = images[current];
+  });
+
+  document.addEventListener("contextmenu", e => e.preventDefault());
+</script>
+
+</body>
+</html>
