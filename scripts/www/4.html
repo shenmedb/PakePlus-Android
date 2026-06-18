@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>攻略大全</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    background:#111;
+    color:#eee;
+    padding:15px;
+    font-family:system-ui, sans-serif;
+    line-height:1.7;
+    padding-bottom: 100px;
+}
+.main{
+    max-width:700px;
+    margin:0 auto;
+    padding-top:30px;
+}
+h1{
+    text-align:center;
+    color:#ffcc00;
+    margin-bottom:40px;
+    font-size:28px;
+    letter-spacing:2px;
+}
+.guide-list{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+.guide-item{
+    background:#1a1a1a;
+    border:1px solid #333;
+    border-radius:12px;
+    padding:20px 15px;
+    text-align:center;
+}
+.guide-item a{
+    display:block;
+    color:#ffcc00;
+    font-size:16px;
+    text-decoration:none;
+    font-weight:bold;
+}
+.guide-item:hover{
+    background:#252525;
+    border-color:#ffcc00;
+    transition:0.2s;
+}
+.desc{
+    font-size:12px;
+    color:#888;
+    margin-top:8px;
+}
+.back-box {
+    position: fixed;
+    bottom: 20px;
+    left: 15px;
+    right: 15px;
+    z-index: 99;
+}
+.back-btn {
+    display: block;
+    width: 100%;
+    padding: 15px 15px;
+    background:#1a1a1a;
+    color:#ffcc00;
+    border:1px solid #333;
+    border-radius:12px;
+    text-align:center;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:16px;
+}
+.back-btn:hover {
+    background:#252525;
+    border-color:#ffcc00;
+    transition:0.2s;
+}
+
+.flow-footer {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 40px;
+}
+.flow-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flow-line a {
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.flow-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+</style>
+</head>
+<body>
+<div class="main">
+    <h1>攻略大全</h1>
+    <div class="guide-list">
+        <div class="guide-item">
+            <a href="sq.html">神器合成攻略</a>
+            <div class="desc">词条搭配｜合成规则｜挽救技巧</div>
+        </div>
+        <div class="guide-item">
+            <a href="db.html">群雄打榜攻略</a>
+            <div class="desc">排行打榜｜上分进阶｜卡分技巧</div>
+        </div>
+        <div class="guide-item">
+            <a href="ms.html">魔兽强化攻略</a>
+            <div class="desc">觉醒魔兽｜材料消耗｜强化概率</div>
+        </div>
+        <div class="guide-item">
+            <a href="zcjy.html">战宠经验总表</a>
+            <div class="desc">升级经验｜成本预测｜等级建议</div>
+        </div>
+        <div class="guide-item">
+            <a href="zcft.html">战宠反吞攻略</a>
+            <div class="desc">进阶消耗｜反吞原理｜技能搭配</div>
+        </div>
+        <div class="guide-item">
+            <a href="jhlj.html">战宠超凡路径</a>
+            <div class="desc">专属加成｜等级加成｜元素更改</div>
+        </div>
+        <div class="guide-item">
+            <a href="qxpy.html">群雄培养总表</a>
+            <div class="desc">升星材料｜积分对照｜阵营汇总</div>
+        </div>
+        <div class="guide-item">
+            <a href="/gailv/gailv.html">跃动概率公示</a>
+            <div class="desc">魔兽战宠｜宝箱家园｜活动抽奖</div>
+        </div>
+
+    </div>
+
+    <div class="flow-footer">
+        <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+        <div class="flow-line">© 2026 起源联盟 版权所有</div>
+        <div class="flow-line">
+            <a href="https://beian.miit.gov.cn/" target="_blank">
+                <img src="foot-icp.png" alt="备案图标">
+                浙ICP备2026025846号-1
+            </a>
+        </div>
+        <div class="flow-line">
+            <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+                <img src="foot-gongan.png" alt="公安备案图标">
+                浙公网安备33052202000916号
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="back-box">
+    <a href="/" class="back-btn">返回首页</a>
+</div>
+
+</body>
+</html>
