@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>海岛联盟名单</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html, body {
+    background:#000;
+    color:#eee;
+    font-family:"Microsoft YaHei",sans-serif;
+    padding:2px;
+    height: auto;
+    min-height: 100dvh;
+    touch-action: auto;
+    -webkit-touch-callout: default;
+    -webkit-user-select: auto;
+    user-select: auto;
+    overflow-x: hidden;
+}
+h1{
+    text-align:center;
+    color:#ffdd40;
+    font-size:24px;
+    margin:10px 0 20px;
+    text-shadow:0 0 8px rgba(255,221,64,0.4)
+}
+.member-wrap{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:15px;
+    padding-bottom: 0;
+}
+
+.group-box {
+    display:grid;
+    gap:2px;
+}
+
+.member-card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,221,64,0.35);
+    border-radius:14px;
+    padding:14px;
+    position: relative;
+    overflow: hidden;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.member-card.leader{
+    grid-column:1/1;
+}
+.member-card.leader .avatar{
+    width:80px;
+    height:80px;
+}
+.member-card.leader .name{
+    font-size:20px;
+}
+.card-video{
+    position:absolute;
+    top:0;left:0;
+    width:100%;height:100%;
+    object-fit:cover;
+    opacity:0.25;
+    z-index:0;
+}
+.member-card .avatar,
+.member-card .info{
+    position:relative;
+    z-index:2;
+}
+.avatar{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid rgba(255,255,255,0.15);
+    flex-shrink:0;
+}
+.info{flex:1}
+.name{font-size:16px;font-weight:bold;margin-bottom:4px}
+.desc{font-size:13px;color:#aaa}
+
+.detail-btn{
+    width:100%;
+    background:rgba(255,221,64,0.4);
+    color:#fff;
+    border:none;
+    padding:6px 0;
+    border-radius:8px;
+    margin-top:6px;
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    z-index: 999;
+}
+.leader-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.badge {
+    position: absolute;
+    top: 5px;
+    right: 12px;
+    width: 70px;
+    height: 70px;
+    z-index: 9;
+    pointer-events: none;
+    user-select: none;
+    object-fit: contain;
+    background: transparent !important;
+    mix-blend-mode: screen;
+    filter: drop-shadow(0 0 1px rgba(255,255,255,0.1));
+}
+@media (max-width:768px){
+    .badge{
+        width: 70px;
+        height: 70px;
+        top: 2px;
+        right: 10px;
+        background: transparent !important;
+        mix-blend-mode: normal;
+    }
+}
+
+.back-home,
+.back-fight,
+.back-intro {
+    position:fixed;
+    bottom:max(12px, env(safe-area-inset-bottom));
+    background:rgba(255,255,255,.1);
+    border:1px solid #ffdd00;
+    color:#ffdd00;
+    padding:10px 18px;
+    border-radius:50px;
+    font-size:14px;
+    font-weight:bold;
+    z-index:9999;
+    white-space:nowrap;
+    cursor: pointer;
+}
+
+.back-home {
+    left:12px;
+}
+.back-fight {
+    right:12px;
+    bottom:calc(max(12px, env(safe-area-inset-bottom)) + 52px);
+}
+.back-intro {
+    right:12px;
+}
+
+#albumModal{
+    display:none;
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:#000;
+    z-index:99999;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:12px;
+}
+#albumModal.show{display:flex}
+.album-wrap{
+    width:90%;
+    max-width:320px;
+    aspect-ratio:9/16;
+    border-radius:20px;
+    overflow:hidden;
+    border:3px solid #ffdd40;
+}
+.album-slide{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-wrap: nowrap;
+    transition: transform .3s ease;
+}
+.album-slide > *{
+    width:100%;
+    height:100%;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+.album-btn-wrapper{
+    width:90%;max-width:320px;display:flex;gap:10px}
+.album-btn{
+    flex:1;background:#ffdd40;color:#000;border:none;padding:12px 0;border-radius:12px;font-weight:bold}
+.album-btn:disabled{background:#444;color:#999}
+
+.two-card-row{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:2px;
+}
+.two-card-row:has(.member-card:only-child) {
+    grid-template-columns: 1fr;
+}
+.two-card-row .member-card {
+    padding: 10px 8px;
+    min-height: 120px;
+    height: auto;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+.two-card-row .member-card .avatar{
+    width:60px;
+    height:60px;
+}
+.two-card-row .member-card .name{
+    font-size:14px;
+}
+.two-card-row .member-card .desc{
+    font-size:11px;
+}
+
+.flow-footer {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 20px;
+  padding-bottom: 100px;
+}
+.flow-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.flow-line a {
+  color: #fff !important;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.flow-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<h1>海岛联盟名单</h1>
+<div class="member-wrap">
+
+<div class="group-box">
+    <div class="member-card leader">
+        <div class="leader-row">
+            <img class="card-video" src="haidao/cl/fhbj.gif" alt="">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <img class="avatar" src="haidao/cl/fhtx.jpg">
+                <button class="detail-btn" onclick="openModal('fh')">介绍</button>
+            </div>
+            <div class="info">
+                <div class="name">一召乄唤风火</div>
+                <div class="desc">重楼盟主<br>苍穹传说、创始众神、跃动活化石！</div>
+            </div>
+        </div>
+        <img class="badge" src="haidao/cl/clhz.png" alt="徽章">
+    </div>
+
+    <div class="two-card-row">
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/cl/lkztx.webp" alt="头像">
+            <div class="info">
+                <div class="name">一指乄裂空斩</div>
+                <div class="desc">重楼CEO<br>统筹全局，真心聚友，赤诚守盟！</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/cl/hfstx.webp" alt="头像">
+            <div class="info">
+                <div class="name">一召乄唤风水</div>
+                <div class="desc">重楼实权股东<br>后勤队长，醉卧沙场秋点兵！</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="group-box">
+    <div class="member-card leader">
+        <div class="leader-row">
+            <img class="card-video" src="haidao/yq/dpbj.gif" alt="">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <img class="avatar" src="haidao/yq/dptx.jpg">
+                <button class="detail-btn" onclick="openModal('dp')">介绍</button>
+            </div>
+            <div class="info">
+                <div class="name">云涧メ东坡</div>
+                <div class="desc">源起盟主<br>起源源起，情深意重！</div>
+            </div>
+        </div>
+        <img class="badge" src="haidao/yq/yqhz.png" alt="徽章">
+    </div>
+
+    <div class="two-card-row">
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/yq/cxtx.webp" alt="头像">
+            <div class="info">
+                <div class="name">晨曦</div>
+                <div class="desc">诗人的左膀<br>联盟骨干 · 忠心守护</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/yq/lcztx.webp" alt="头像">
+            <div class="info">
+                <div class="name">火云メ老村长</div>
+                <div class="desc">诗人的右臂<br>战力先锋 · 并肩同行</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="group-box">
+    <div class="member-card leader">
+        <div class="leader-row">
+            <img class="card-video" src="haidao/zs/xhbj.gif" alt="">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <img class="avatar" src="haidao/zs/xhtx.jpg">
+                <button class="detail-btn" onclick="openModal('xh')">介绍</button>
+            </div>
+            <div class="info">
+                <div class="name">众神（破孩）</div>
+                <div class="desc">众神盟主<br>双号战力爆棚，最可靠的战友！</div>
+            </div>
+        </div>
+        <img class="badge" src="haidao/zs/zshz.png" alt="徽章">
+    </div>
+
+    <div class="two-card-row">
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/zs/sgtx.webp" alt="头像">
+            <div class="info">
+                <div class="name">众神（時光）</div>
+                <div class="desc">战区悍将<br>以心为炬照前路，以情聚力兴同盟</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/zs/xltx.webp" alt="头像">
+            <div class="info">
+                <div class="name">众神(∩_∩)</div>
+                <div class="desc">后勤支援<br>辅盟兴治凝众志，携行共进筑同心</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="group-box">
+    <div class="member-card leader">
+        <div class="leader-row">
+            <img class="card-video" src="haidao/hdc/czbj.gif" alt="">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <img class="avatar" src="haidao/hdc/cztx.jpg">
+                <button class="detail-btn" onclick="openModal('cz')">介绍</button>
+            </div>
+            <div class="info">
+                <div class="name">混沌⚔城主</div>
+                <div class="desc">混沌城盟主<br>战区顶级战力，PK技战术大师！</div>
+            </div>
+        </div>
+        <img class="badge" src="haidao/hdc/hdchz.png" alt="徽章">
+    </div>
+
+    <div class="two-card-row">
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/hdc/cxtx.webp" alt="头像">
+            <div class="info">
+                <div class="name">混沌⚔初心</div>
+                <div class="desc">混沌城指挥<br>内聚外联，同心共盟，决胜千里！</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/hdc/kktx.webp" alt="头像">
+            <div class="info">
+                <div class="name">混沌⚔克克</div>
+                <div class="desc">混沌情义担当<br>以盟为家，重情重义!</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="group-box">
+    <div class="member-card leader">
+        <div class="leader-row">
+            <img class="card-video" src="haidao/my/zxsbj.gif" alt="">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <img class="avatar" src="haidao/my/zxstx.jpg">
+                <button class="detail-btn" onclick="openModal('zxs')">介绍</button>
+            </div>
+            <div class="info">
+                <div class="name">魔域༒張先森</div>
+                <div class="desc">魔域盟主<br>战斗，爽！</div>
+            </div>
+        </div>
+        <img class="badge" src="haidao/my/myxyhz.png" alt="徽章">
+    </div>
+
+    <div class="member-card leader">
+        <div class="leader-row">
+            <img class="card-video" src="haidao/my/lxbj.gif" alt="">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <img class="avatar" src="haidao/my/lxtx.webp">
+                <button class="detail-btn" onclick="openModal('lx')">介绍</button>
+            </div>
+            <div class="info">
+                <div class="name">仙域༒理想</div>
+                <div class="desc">仙域盟主<br>与魔域同出一门，患难与共！</div>
+            </div>
+        </div>
+        <img class="badge" src="haidao/my/myxyhz.png" alt="徽章">
+    </div>
+</div>
+
+<div class="group-box">
+    <div class="member-card leader">
+        <div class="leader-row">
+            <img class="card-video" src="haidao/xzs/jybj.gif" alt="">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <img class="avatar" src="haidao/xzs/jytx.webp" alt="头像">
+                <button class="detail-btn" onclick="openModal('jy')">介绍</button>
+            </div>
+            <div class="info">
+                <div class="name">众神（九月）</div>
+                <div class="desc">众神盟主<br>战魂欧皇 众神砥柱</div>
+            </div>
+        </div>
+        <img class="badge" src="haidao/xzs/zshz.png" alt="徽章">
+    </div>
+
+    <div class="two-card-row">
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/xzs/ddtx.webp" alt="头像">
+            <div class="info">
+                <div class="name">众神（大地）</div>
+                <div class="desc">众神外交官<br>他的身影无处不在</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/xzs/tktx.webp" alt="头像">
+            <div class="info">
+                <div class="name">众神（TK）</div>
+                <div class="desc">众神管家<br>查缺补漏，他的眼睛就是尺！</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="group-box">
+    <div class="member-card leader">
+        <div class="leader-row">
+            <img class="card-video" src="haidao/ylm/dhbj.gif" alt="">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <img class="avatar" src="haidao/ylm/dhtx.webp" alt="头像">
+                <button class="detail-btn" onclick="openModal('dh')">介绍</button>
+            </div>
+            <div class="info">
+                <div class="name">养老盟♥断虹</div>
+                <div class="desc">养老盟盟主<br>与联盟共进退，荣辱与共</div>
+            </div>
+        </div>
+        <img class="badge" src="haidao/ylm/ylmhz.png" alt="徽章">
+    </div>
+
+    <div class="two-card-row">
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/ylm/yjtx.webp" alt="头像">
+            <div class="info">
+                <div class="name">养老盟♥妖精</div>
+                <div class="desc">养老盟管理<br>为了联盟勇往直前</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/ylm/xdtx.webp" alt="头像">
+            <div class="info">
+                <div class="name">养老盟♥️熊大</div>
+                <div class="desc">养老盟管理<br>联盟的资源高于一切</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="group-box">
+    <div class="member-card leader">
+        <div class="leader-row">
+            <img class="card-video" src="haidao/qyi/nfbj.gif" alt="">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <img class="avatar" src="haidao/qyi/nftx.webp" alt="头像">
+                <button class="detail-btn" onclick="openModal('nf')">介绍</button>
+            </div>
+            <div class="info">
+                <div class="name">情谊༉南风</div>
+                <div class="desc">情谊盟主<br>第一巅峰大神 情谊老大</div>
+            </div>
+        </div>
+        <img class="badge" src="haidao/qyi/qyihz.png" alt="徽章">
+    </div>
+
+    <div class="two-card-row">
+        <div class="member-card">
+            <img class="card-video" src="haidao/qyi/lxfbj.gif" alt="">
+            <img class="avatar" src="haidao/qyi/lxftx.webp" alt="头像">
+            <div class="info">
+                <div class="name">情谊༉流星飞</div>
+                <div class="desc">情谊外交官<br>大海岛群活跃分子</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/qyi/kbtx.webp" alt="头像">
+            <div class="info">
+                <div class="name">情谊༉空白</div>
+                <div class="desc">情谊管家<br>领地王子，领地对拉就是怼！</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="group-box">
+    <div class="member-card leader">
+        <div class="leader-row">
+            <img class="card-video" src="haidao/qy/xzbj.gif" alt="">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <img class="avatar" src="haidao/qy/xztx.webp" alt="头像">
+                <button class="detail-btn" onclick="openModal('xz')">介绍</button>
+            </div>
+            <div class="info">
+                <div class="name">情缘✨️💖</div>
+                <div class="desc">情缘盟主<br>熬夜王子 好战分子</div>
+            </div>
+        </div>
+        <img class="badge" src="haidao/qy/qyhz.png" alt="徽章">
+    </div>
+
+    <div class="two-card-row">
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/qy/fdtx.webp" alt="头像">
+            <div class="info">
+                <div class="name">情缘྅发№呆</div>
+                <div class="desc">情缘外交官<br>群雄小能手，跃动黑鬼</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/qy/fttx.webp" alt="头像">
+            <div class="info">
+                <div class="name">情缘྅飞天</div>
+                <div class="desc">情缘主力<br>循环第一，他的眼睛就是尺！</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="member-card leader">
+    <div class="leader-row">
+        <img class="card-video" src="haidao/lxd/lxdbj.webp" alt="">
+        <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="width:80px;height:80px;visibility:hidden;"></div>
+          <button class="detail-btn" onclick="openModal('lxd')">介绍</button>
+        </div>
+        <div class="info">
+            <div class="name">老兄弟</div>
+            <div class="desc">老兄弟是一个爱玩的集体<br>是一个爱较真的集体也必将是一个英雄的集体！</div>
+        </div>
+        </div>
+        <img class="badge" src="haidao/lxd/lxdhz.png" alt="徽章">
+</div>
+
+<div class="group-box">
+    <div class="member-card leader">
+        <div class="leader-row">
+            <img class="card-video" src="haidao/zsd/szbj.gif" alt="">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <img class="avatar" src="haidao/zsd/sztx.webp">
+                <button class="detail-btn" onclick="openModal('sz')">介绍</button>
+            </div>
+            <div class="info">
+                <div class="name">众神殿丶嫂子</div>
+                <div class="desc">众神殿会长<br>擅长下棋，海岛好战分子，联盟铁粉！</div>
+            </div>
+        </div>
+        <img class="badge" src="haidao/zsd/zsdhz.png" alt="徽章">
+    </div>
+
+    <div class="two-card-row">
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/zsd/fxtx.webp" alt="头像">
+            <div class="info">
+                <div class="name">众神殿丶飞翔</div>
+                <div class="desc">众神殿管理<br>联盟主力打手</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/zsd/lltx.webp" alt="头像">
+            <div class="info">
+                <div class="name">众神殿丶流年</div>
+                <div class="desc">联盟副指挥官</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="group-box">
+    <div class="member-card leader">
+        <div class="leader-row">
+            <img class="card-video" src="haidao/ws/wsss.gif" alt="">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <img class="avatar" src="haidao/ws/sstx.webp">
+                <button class="detail-btn" onclick="openModal('ss')">介绍</button>
+            </div>
+            <div class="info">
+                <div class="name">無雙の叁氺</div>
+                <div class="desc">無雙盟主<br>以盟为锋，天下无双</div>
+            </div>
+        </div>
+        <img class="badge" src="haidao/ws/wshz.png" alt="徽章">
+    </div>
+
+    <div class="two-card-row">
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/ws/wsemtx.webp" alt="头像">
+            <div class="info">
+                <div class="name">無雙の恶魔</div>
+                <div class="desc">联盟管理<br>突击先锋，好战分子</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="card-video" src="video3.gif" alt="" style="display:none;">
+            <img class="avatar" src="haidao/ws/wsztx.webp" alt="头像">
+            <div class="info">
+                <div class="name">無雙の紫</div>
+                <div class="desc">联盟军师<br>大总管，外交达人</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="flow-footer">
+  <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+  <div class="flow-line">© 2026 起源联盟版权所有</div>
+  <div class="flow-line">
+    <a href="https://beian.miit.gov.cn/" target="_blank">
+      <img src="foot-icp.png" alt="备案图标">
+      浙ICP备2026025846号-1
+    </a>
+  </div>
+  <div class="flow-line">
+    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+      <img src="foot-gongan.png" alt="公安备案图标">
+      浙公网安备33052202000916号
+    </a>
+  </div>
+</div>
+
+<button class="back-home" onclick="location.href='./'">返回主页</button>
+<button class="back-fight" onclick="location.href='22.html'">海岛激战</button>
+<button class="back-intro" onclick="location.href='/pipei/pipei.html'">海岛匹配</button>
+
+<div id="albumModal" onclick="closeModal(event)">
+    <div class="album-wrap">
+        <div class="album-slide" id="slide"></div>
+    </div>
+    <div class="album-btn-wrapper">
+        <button class="album-btn" id="prevBtn">上一张</button>
+        <button class="album-btn" id="nextBtn">下一张</button>
+    </div>
+</div>
+
+<audio id="bgm" loop>
+
+<script>
+const songList = [
+    "haidao/9.mp3",
+];
+const randomIndex = Math.floor(Math.random() * songList.length);
+const audio = document.getElementById('bgm');
+audio.src = songList[randomIndex];
+document.addEventListener('click', () => {
+    audio.play();
+}, { once: true });
+</script>
+
+<script>
+const modalData = {
+    fh:{imgs:['haidao/cl/fh1.webp','haidao/cl/fh2.webp']},
+    dp:{imgs:['haidao/yq/dp1.webp']},
+    xh:{imgs:['haidao/zs/xh.webp','haidao/zs/xh1.webp','haidao/zs/xh2.webp']},
+    cz:{imgs:['haidao/hdc/cz1.webp','haidao/hdc/cz2.webp']},
+    zxs:{imgs:['haidao/my/zxs.webp','haidao/my/zxs2.webp']},
+    lx:{imgs:['haidao/my/lx1.webp']},
+    jy:{imgs:['haidao/xzs/jy1.webp']},
+    dh:{imgs:['haidao/ylm/dh1.webp']},
+    nf:{imgs:['haidao/qyi/nf1.webp']},
+    xz:{imgs:['haidao/qy/xz1.webp']},
+    lxd:{imgs:['haidao/lxd.webp']},
+    sz:{imgs:['haidao/zsd/sz1.webp']},
+    ss:{imgs:['haidao/ws/wsss.webp']}
+};
+let currentIndex=0;
+const slide=document.getElementById('slide');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+const albumModal=document.getElementById('albumModal');
+const bgm=document.getElementById('bgm');
+
+function openModal(k){
+    const d=modalData[k];if(!d)return;
+    currentIndex=0;
+    slide.innerHTML='';
+    d.imgs.forEach(s=>{
+        const el=/\.(mp4|webm|mov)$/i.test(s)?document.createElement('video'):document.createElement('img');
+        el.src=s;
+        if(el.tagName=='VIDEO'){
+            el.loop=true;el.muted=true;el.playsInline=true;
+        }
+        slide.appendChild(el);
+    });
+    update();
+    albumModal.classList.add('show');
+}
+
+function closeModal(e){
+    if(e.target===albumModal){
+        albumModal.classList.remove('show');
+    }
+}
+
+function update(){
+    slide.style.transform=`translateX(-${currentIndex*100}%)`;
+    prevBtn.disabled=currentIndex<1;
+    nextBtn.disabled=currentIndex>=slide.children.length-1;
+}
+
+prevBtn.addEventListener('click',()=>{
+    currentIndex--;
+    update();
+});
+
+nextBtn.addEventListener('click',()=>{
+    currentIndex++;
+    update();
+});
+
+document.addEventListener('DOMContentLoaded',()=>{
+    document.addEventListener('click',()=>{
+        bgm.play().catch(()=>{});
+    },{once:true});
+});
+</script>
+</body>
+</html>
