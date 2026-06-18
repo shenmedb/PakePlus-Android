@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>起源联盟</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-text-size-adjust: 100% !important;
+    -moz-text-size-adjust: 100% !important;
+    -ms-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+}
+html, body {
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+#page1 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
+}
+.banner-img {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.marquee-home {
+  position: fixed;
+  z-index: 99996;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 36px;
+  line-height: 36px;
+  background: rgba(255,221,0,0.85);
+  color: #000;
+  font-size: 14px !important;
+  font-weight: bold;
+  border-radius: 30px;
+  padding: 0 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,221,0,0.5);
+  -webkit-text-size-adjust: none !important;
+}
+.marquee-box {
+  display: inline-block;
+  white-space: nowrap;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-left: 0;
+  font-size: inherit !important;
+  -webkit-text-size-adjust: none !important;
+}
+.marquee-text {
+  display: inline-block;
+  padding-right: 60px;
+  white-space: nowrap;
+  font-size: inherit !important;
+  -webkit-text-size-adjust: none !important;
+}
+
+.marquee-msg {
+  bottom: calc(155px + env(safe-area-inset-bottom));
+  width: 620px;
+}
+.marquee-lottery {
+  bottom: calc(115px + env(safe-area-inset-bottom));
+  width: 620px;
+}
+
+@media (max-width: 768px) {
+  .marquee-msg {
+    bottom: calc(205px + env(safe-area-inset-bottom));
+    width: 86% !important;
+  }
+  .marquee-lottery {
+    bottom: calc(165px + env(safe-area-inset-bottom));
+    width: 86% !important;
+  }
+}
+
+.fixed-btn {
+  position: fixed;
+  bottom: calc(65px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 99998;
+}
+.fixed-btn button {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 221, 0, 0.5);
+  color: #ffdd00;
+  padding: 12px 16px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+.fixed-btn button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #ffdd00;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .fixed-btn { display: none !important; }
+
+  .mobile-bottom-actions {
+    position: fixed;
+    z-index: 99998;
+    right: 12px;
+    top: calc(15px + env(safe-area-inset-top));
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+.mobile-bottom-actions button {
+    background: rgba(40, 40, 40, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 0, 0, 0.7);
+    color: #ff4444;
+    padding: 10px 14px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    animation: redBreath 2s infinite ease-in-out;
+}
+
+  .mobile-top-nav {
+    position: fixed;
+    z-index: 99997;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(65px + env(safe-area-inset-bottom));
+    width: 90%;
+    max-width: 380px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 8px;
+    column-gap: 22px;
+  }
+  .mobile-top-nav button {
+    background: rgba(40, 40, 40, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,221,0,0.4);
+    color: #ffdd00;
+    padding: 12px 0;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 900;
+    margin: 0;
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-bottom-actions, .mobile-top-nav { display: none !important; }
+}
+
+.footer-fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 5px 0 calc(3px + env(safe-area-inset-bottom));
+  background: transparent;
+  z-index: 50;
+}
+.footer-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-line a {
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.footer-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+
+.flow-footer {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 20px;
+}
+.flow-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flow-line a {
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.flow-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+
+#page2 {
+    display: none;
+    background: #000;
+    padding: 20px 10px 120px;
+    line-height: 1.7;
+    width: 100%;
+    min-height: 100vh;
+    overflow-y: visible;
+}
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.header h1 {
+    font-size: 26px;
+    color: #ffdd40;
+    text-shadow: 0 0 12px rgba(255,221,60,0.4);
+    margin-bottom: 8px;
+}
+.header p {
+    color: #aaa;
+    font-size: 15px;
+}
+.card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 18px;
+    margin: 0 5px 14px 5px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+.card h2 {
+    font-size: 19px;
+    color: #fff;
+    margin-bottom: 12px;
+}
+.card h2::before {
+    content: "🔹";
+}
+.card p {
+    color: #ccc;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+.list {
+    padding-left: 15px;
+    color: #ccc;
+}
+.list li {
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.back-btn {
+    position: fixed;
+    left: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 221, 0, 0.5);
+    color: #ffdd00;
+    padding: 11px 20px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 99998;
+    transition: all 0.3s ease;
+}
+
+.right-buttons {
+    position: fixed;
+    right: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 99998;
+}
+
+.member-btn,
+.island-btn {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 221, 0, 0.5);
+    color: #ffdd00;
+    padding: 11px 20px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  #page2 {
+    padding: 15px 2px 0 !important;
+  }
+  .card {
+    margin: 0 2px 12px 2px !important;
+    padding: 16px !important;
+  }
+  .back-btn {
+    left: 8px !important;
+    bottom: calc(8px + env(safe-area-inset-bottom)) !important;
+    padding: 10px 16px !important;
+  }
+  .right-buttons {
+    right: 8px !important;
+    bottom: calc(8px + env(safe-area-inset-bottom)) !important;
+    gap: 6px !important;
+  }
+  .member-btn, .island-btn {
+    padding: 10px 16px !important;
+    font-size: 14px !important;
+  }
+}
+
+#page3 {
+    display: none;
+    background: #000;
+    padding: 25px 5px 120px;
+    width: 100%;
+    min-height: 100vh;
+    overflow-y: visible;
+}
+#page3 h1{
+    text-align:center;
+    color:#ffdd40;
+    font-size:26px;
+    margin-bottom:25px;
+    text-shadow:0 0 8px rgba(255,221,60,0.4);
+}
+.member-wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:5px;
+    margin-bottom:30px;
+}
+.member-card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:14px;
+    padding:12px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+}
+.card-video{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0.28;
+    z-index:0;
+}
+.member-card .avatar,.member-card .info{
+    position:relative;
+    z-index:2;
+}
+.member-card.leader{
+    grid-column:1/3;
+    grid-row:span 2;
+    padding:20px;
+    flex-direction:column;
+    align-items:stretch;
+    gap:12px;
+    border:1px solid rgba(255,221,60,0.35);
+    position: relative;
+}
+
+.leader-badge {
+    position: absolute;
+    top: 5px;
+    right: 12px;
+    width: 70px;
+    height: 70px;
+    z-index: 9;
+    pointer-events: none;
+    user-select: none;
+    object-fit: contain;
+    background: transparent;
+}
+
+@media (max-width:768px){
+    .leader-badge{
+        width: 70px;
+        height: 70px;
+        top: 2px;
+        right: 10px;
+    }
+}
+
+.leader-main{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+.member-card.leader .avatar{
+  width:95px;
+  height:95px;
+  display:block;
+}
+.member-card.leader .name{font-size:22px;margin-bottom:8px}
+.member-card.leader .desc{font-size:15px}
+.avatar{
+    width:55px;
+    height:55px;
+    display:block;
+    border-radius:50%;
+    object-fit:cover;
+    flex-shrink:0;
+    border:2px solid rgba(255,255,255,0.15);
+    pointer-events:none;
+    user-select:none;
+    -webkit-user-drag:none;
+}
+.info{flex:1}
+.name{font-size:15px;color:#fff;font-weight:bold;margin-bottom:4px}
+.desc{font-size:12px;color:#aaa;line-height:1.4}
+.detail-btn{
+    width:27%;
+    background:rgba(255,221,60,0.4);
+    color:#fff;
+    border:1px solid rgba(255,221,60,0.3);
+    padding:6px 0;
+    border-radius:8px;
+    font-size:14px;
+    cursor:pointer;
+    position:relative;
+    z-index:999;
+}
+
+.back-home3,
+.back-intro3 {
+    position: fixed;
+    bottom: calc(20px + env(safe-area-inset-bottom));
+    padding: 11px 20px;
+    border-radius: 30px;
+    font-size: 15px;
+    z-index: 99998;
+    cursor: pointer;
+    background: rgba(255,255,255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 221, 0, 0.5);
+    color: #ffdd00;
+    transition: all 0.3s ease;
+}
+
+.back-home3 { left: 18px; }
+.back-intro3 { right: 18px; }
+
+@media (max-width: 768px) {
+  .back-home3,
+  .back-intro3 {
+    bottom: calc(8px + env(safe-area-inset-bottom)) !important;
+    padding: 10px 18px;
+    font-size: 15px;
+  }
+  .back-home3 { left: 15px; }
+  .back-intro3 { right: 15px; }
+}
+
+#albumModal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.95);
+    z-index:9999;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:12px;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+#albumModal.show{display:flex}
+.album-wrap{
+    width:100%;
+    max-width:22.5rem;
+    aspect-ratio:9/16;
+    position:relative;
+    border-radius:20px;
+    overflow:hidden;
+    border:3px solid #ffdd40;
+}
+.album-slide{
+    width:100%;
+    height:100%;
+    display:flex;
+    transition:transform 0.3s ease;
+}
+.album-slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    flex-shrink:0;
+    pointer-events:none;
+    user-select:none;
+    -webkit-user-drag:none;
+}
+.album-btn-wrapper{
+    width:100%;
+    max-width:22.5rem;
+    display:flex;
+    gap:10px;
+}
+.album-btn{
+    flex:1;
+    background:#ffdd40;
+    color:#000;
+    border:none;
+    padding:14px 0;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:bold;
+}
+.album-btn:disabled{background:#666;color:#aaa}
+
+audio {
+    display: none;
+}
+@keyframes redBreath {
+    0% {
+        border-color: rgba(255, 0, 0, 0.4);
+        box-shadow: 0 0 4px rgba(255, 0, 0, 0.3);
+    }
+    50% {
+        border-color: rgba(255, 0, 0, 0.9);
+        box-shadow: 0 0 12px rgba(255, 0, 0, 0.7);
+    }
+    100% {
+        border-color: rgba(255, 0, 0, 0.4);
+        box-shadow: 0 0 4px rgba(255, 0, 0, 0.3);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" src="qiyuan.mp3" loop></audio>
+<div id="page1">
+  <img class="banner-img" src="zuixin.webp" alt="背景">
+  <div class="marquee-home marquee-msg">
+    <div class="marquee-box" id="marqueeBox">
+      <span class="marquee-text" id="marqueeText">起源联盟欢迎你</span>
+    </div>
+  </div>
+<div class="marquee-home marquee-lottery">
+  <div class="marquee-box" id="lotteryBox">
+    <span class="marquee-text" id="lotteryText">加载中...</span>
+  </div>
+</div>
+
+  <div class="fixed-btn">
+    <button onclick="showPage2()">联盟介绍</button>
+    <button onclick="goTo('2.html')">联盟公告</button>
+    <button onclick="goTo('hd.html')">海岛联盟</button>
+    <button onclick="goTo('4.html')">攻略大全</button>
+    <button onclick="location.href='yuedong/lyxz.html'">全服留言</button>
+    <button onclick="goTo('choujiang/cjmz.html')">在线抽奖</button>
+  </div>
+
+  <div class="mobile-top-nav">
+    <button onclick="showPage2()">联盟介绍</button>
+    <button onclick="goTo('2.html')">联盟公告</button>
+    <button onclick="goTo('hd.html')">海岛联盟</button>
+    <button onclick="goTo('4.html')">攻略大全</button>
+  </div>
+  
+  <div class="mobile-bottom-actions">
+    <button onclick="location.href='yuedong/lyxz.html'">全服留言</button>
+    <button onclick="goTo('choujiang/cjmz.html')">在线抽奖</button>
+  </div>
+
+  <div class="footer-fixed">
+    <div class="footer-line">本站内容仅供娱乐交流使用，禁止商用</div>
+    <div class="footer-line">© 2026 起源联盟 版权所有</div>
+    <div class="footer-line">
+      <a href="https://beian.miit.gov.cn/" target="_blank">
+        <img src="foot-icp.png" alt="备案图标">
+        浙ICP备2026025846号-1
+      </a>
+    </div>
+    <div class="footer-line">
+      <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+        <img src="foot-gongan.png" alt="公安备案图标">
+       浙公网安备33052202000916号
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="page2" name="intro">
+    <div class="header">
+        <h1>联盟介绍</h1>
+        <p>汇聚精英 · 共创辉煌 · 永不言弃</p>
+    </div>
+    <div class="card">
+        <h2>联盟简介</h2>
+        <p>起源联盟，前身“苍穹之巅”与“环球力量”。2025年8月由拯救、辉大人带队合盟，活跃人数破90，登顶海岛争霸一线大船。后得“幕后主使”等强援，人称“起源分源”。</p>
+        <p>我们公平团结，互助共赢。不论新手大佬，活跃即战友，一起征战跃动！</p>
+    </div>
+    <div class="card">
+        <h2>联盟宗旨</h2>
+        <ul class="list">
+            <li>团结互助，拒绝内耗</li>
+            <li>遵守规则，文明游戏</li>
+            <li>积极贡献，共同发展</li>
+            <li>照顾新手，培养主力</li>
+        </ul>
+    </div>
+    <div class="card">
+        <h2>加入福利</h2>
+        <ul class="list">
+            <li>群内技术援助，稳步发育</li>
+            <li>固定团战活动，高额奖励</li>
+            <li>大佬带队指导，少走弯路</li>
+            <li>定期福利发放，贡献有奖</li>
+            <li>高光时刻展示、荣誉职位</li>
+        </ul>
+    </div>
+    <div class="card">
+        <h2>加入要求</h2>
+        <ul class="list">
+            <li>每天稳定在线，积极做任务</li>
+            <li>听从管理安排，不搞事</li>
+            <li>积极参与联盟活动与团战</li>
+            <li>长期活跃，拒绝躺尸</li>
+        </ul>
+    </div>
+    <div class="card">
+        <h2>起源期待你</h2>
+        <p>无兄弟，不游戏！这里有最热血的伙伴、最靠谱的团队、最温暖的大家庭。</p>
+        <p>期待你的加入，让我们一起并肩作战，共创传奇！</p>
+    </div>
+
+  <div class="flow-footer">
+    <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+    <div class="flow-line">© 2026 起源联盟版权所有</div>
+    <div class="flow-line">
+      <a href="https://beian.miit.gov.cn/" target="_blank">
+        <img src="foot-icp.png" alt="备案图标">
+        浙ICP备2026025846号-1
+      </a>
+    </div>
+    <div class="flow-line">
+      <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+        <img src="foot-gongan.png" alt="公安备案图标">
+        浙公网安备33052202000916号
+      </a>
+    </div>
+  </div>
+
+    <button class="back-btn" onclick="showPage1()">返回主页</button>
+    <div class="right-buttons">
+        <button class="member-btn" onclick="showPage3()">成员名单</button>
+        <button class="island-btn" onclick="goTo('3.html')">全员预览</button>
+    </div>
+</div>
+
+<div id="page3">
+    <h1>联盟成员名单</h1>
+    <div class="member-wrap">
+        <div class="member-card leader">
+            <img class="leader-badge" src="qy.png" alt="盟主徽章">
+            <div class="leader-main">
+                <img class="card-video" src="zhengjiu.gif" alt="">
+                <img class="avatar" src="chengyuan/zhengj.jpg" alt="">
+                <div class="info">
+                    <div class="name">盟主 · 拯救</div>
+                    <div class="desc">联盟统治者，战区顶尖战力，统筹全盟事务</div>
+                </div>
+            </div>
+            <button class="detail-btn" onclick="openAlbum()">详细介绍</button>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/huida.jpg" alt="">
+            <div class="info">
+                <div class="name">副盟主 · 辉大</div>
+                <div class="desc">团战指挥，战术大师，负责日常活动安排</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/h.jpg" alt="">
+            <div class="info">
+                <div class="name">管理 · 海</div>
+                <div class="desc">新人接待，盟内秩序维护，活跃监督</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="card-video" src="zhushi.gif" alt="">
+            <img class="avatar" src="chengyuan/zhushi.jpg" alt="">
+            <div class="info">
+                <div class="name">管理 · 主使</div>
+                <div class="desc">资源发放统计，活动记录，福利管理</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/jiutong.jpg" alt="">
+            <div class="info">
+                <div class="name">管理 · 九筒</div>
+                <div class="desc">资源发放统计，活动记录，福利管理</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/aa.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · aa</div>
+                <div class="desc">超级马力 逍遥刺客 神出鬼没</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/feiche.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 飞车</div>
+                <div class="desc">战力在线 副本带飞 技术过硬</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/qgg.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 琦哥哥</div>
+                <div class="desc">风流倜傥 套马王子 稳定在线</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/feiche.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 玩玩</div>
+                <div class="desc">全能选手 啥都能玩 随叫随到</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/!.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · ！</div>
+                <div class="desc">与世无争 随缘游玩 安稳度日</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/xiamo.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 夏末</div>
+                <div class="desc">热爱游戏 并肩同行 相伴游玩</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/jihe.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 几何</div>
+                <div class="desc">日常肝满 材料全刷 进度领跑</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/shenmi.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 神秘</div>
+                <div class="desc">随心游玩 轻松度日 享受对局</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/fengya.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 风涯</div>
+                <div class="desc">专注游玩 稳步成长 默默努力</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/xiaoyue.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 小月</div>
+                <div class="desc">休闲娱乐 随缘参与 开心就好</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/nanshan.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 南山</div>
+                <div class="desc">休闲娱乐 随缘参与 开心就好</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/huaying.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 画影</div>
+                <div class="desc">氛围担当 唠嗑活跃 快乐整活</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/xiongba.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 雄霸</div>
+                <div class="desc">副本常驻 输出稳定 绝不划水</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/hualuo.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 花落</div>
+                <div class="desc">结伴同行 携手闯关 共同娱乐</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/wuyue.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 伍月</div>
+                <div class="desc">萌新互助 积极参与 快乐游戏</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/sss.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · sss</div>
+                <div class="desc">日常活跃 副本随叫 任务全清</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/senlin.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 森林</div>
+                <div class="desc">佛系随缘 偶尔上线 快乐摸鱼</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/gui.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 👺</div>
+                <div class="desc">热爱组队 积极合群 友好相处</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/shenmi.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 云舒</div>
+                <div class="desc">慢慢养成 潜心游玩 安静佛系</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/xiaogang.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 小刚</div>
+                <div class="desc">慢慢养成 潜心游玩 安静佛系</div>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="avatar" src="chengyuan/ae.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 啊鹅</div>
+                <div class="desc">慢慢养成 潜心游玩 安静佛系</div>
+            </div>
+        </div>
+         <div class="member-card">
+            <img class="avatar" src="chengyuan/shenmi.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 板砖</div>
+                <div class="desc">随心游玩 轻松度日 享受对局</div>
+            </div>
+        </div>
+          <div class="member-card">
+            <img class="avatar" src="chengyuan/ll.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 樂樂</div>
+                <div class="desc">慢慢养成 潜心游玩 安静佛系</div>
+            </div>
+        </div>
+             <div class="member-card">
+            <img class="avatar" src="chengyuan/lm.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 梁木</div>
+                <div class="desc">慢慢养成 潜心游玩 安静佛系</div>
+            </div>
+        </div>
+           <div class="member-card">
+            <img class="avatar" src="chengyuan/lk.webp" alt="">
+            <div class="info">
+                <div class="name">成员 · 老K</div>
+                <div class="desc">日常活跃 副本随叫 任务全清</div>
+            </div>
+        </div>
+          <div class="member-card">
+            <img class="avatar" src="chengyuan/xyt.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 小犹太</div>
+                <div class="desc">慢慢养成 潜心游玩 安静佛系</div>
+            </div>
+        </div>
+         <div class="member-card">
+            <img class="avatar" src="chengyuan/lls.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 浪浪</div>
+                <div class="desc">日常活跃 副本随叫 任务全清</div>
+            </div>
+        </div>
+         <div class="member-card">
+            <img class="avatar" src="chengyuan/at.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · At</div>
+                <div class="desc">慢慢养成 潜心游玩 安静佛系</div>
+            </div>
+        </div>
+         <div class="member-card">
+            <img class="avatar" src="chengyuan/cq.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 苍穹</div>
+                <div class="desc">慢慢养成 潜心游玩 安静佛系</div>
+            </div>
+        </div>
+           <div class="member-card">
+            <img class="avatar" src="chengyuan/zt.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 昨天</div>
+                <div class="desc">慢慢养成 潜心游玩 安静佛系</div>
+            </div>
+        </div>
+           <div class="member-card">
+            <img class="avatar" src="chengyuan/zt.jpg" alt="">
+            <div class="info">
+                <div class="name">成员 · 明天</div>
+                <div class="desc">慢慢养成 潜心游玩 安静佛系</div>
+            </div>
+        </div>
+    </div>
+
+  <div class="flow-footer">
+    <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+    <div class="flow-line">© 2026 起源联盟版权所有</div>
+    <div class="flow-line">
+      <a href="https://beian.miit.gov.cn/" target="_blank">
+        <img src="foot-icp.png" alt="备案图标">
+        浙ICP备2026025846号-1
+      </a>
+    </div>
+    <div class="flow-line">
+      <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+        <img src="foot-gongan.png" alt="公安备案图标">
+        浙公网安备33052202000916号
+      </a>
+    </div>
+  </div>
+
+    <button class="back-home3" onclick="showPage1()">返回主页</button>
+    <button class="back-intro3" onclick="showPage2()">联盟介绍</button>
+
+    <div id="albumModal" onclick="closeAlbum(event)">
+        <div class="album-wrap">
+            <div class="album-slide" id="slide">
+                <img src="chengyuan/zj/zj.jpg" alt="">
+                <img src="chengyuan/zj/zj1.jpg" alt="">
+                <img src="chengyuan/zj/zj2.jpg" alt="">
+                <img src="chengyuan/zj/zj3.jpg" alt="">
+                <img src="chengyuan/zj/zj4.jpg" alt="">
+            </div>
+        </div>
+        <div class="album-btn-wrapper">
+            <button class="album-btn" id="prevBtn">上一张</button>
+            <button class="album-btn" id="nextBtn">下一张</button>
+        </div>
+    </div>
+</div>
+
+<script>
+var box, textEl, textWidth, x, speed;
+window.onload = function () {
+    box = document.getElementById('marqueeBox');
+    textEl = document.getElementById('marqueeText');
+    x = 0;
+    speed = 0.6;
+    loadMsg();
+    setInterval(loadMsg, 15000);
+    setTimeout(startRoll, 500);
+
+    initLotteryMarquee();
+
+    if(window.location.hash === "#page2") showPage2();
+    initMusic();
+};
+
+function loadMsg() {
+    fetch('yuedong/get_msg.php')
+    .then(r => r.text())
+    .then(t => {
+        textEl.innerText = t + '     ';
+        setTimeout(() => { textWidth = textEl.offsetWidth; }, 100);
+    })
+    .catch(() => {
+        textEl.innerText = '起源联盟欢迎你     ';
+        setTimeout(() => { textWidth = textEl.offsetWidth; }, 100);
+    });
+}
+
+function startRoll() {
+    function roll() {
+        if (textWidth) {
+            x -= speed;
+            if (x <= -textWidth) x = 0;
+            box.style.transform = 'translateX(' + x + 'px)';
+        }
+        requestAnimationFrame(roll);
+    }
+    roll();
+}
+
+var lotteryBox, lotteryText, lotteryWidth, lotteryX, lotterySpeed;
+function initLotteryMarquee() {
+    lotteryBox = document.getElementById('lotteryBox');
+    lotteryText = document.getElementById('lotteryText');
+    lotteryX = 0;
+    lotterySpeed = 0.8;
+    loadLottery();
+    setTimeout(startLotteryRoll, 500);
+}
+
+function loadLottery() {
+    fetch('choujiang/get_lottery.php')
+    .then(r => r.text())
+    .then(t => {
+        lotteryText.innerText = t + '     ';
+        setTimeout(() => { lotteryWidth = lotteryText.offsetWidth; }, 100);
+    })
+    .catch(() => {
+        lotteryText.innerText = '抽奖进行中...     ';
+        setTimeout(() => { lotteryWidth = lotteryText.offsetWidth; }, 100);
+    });
+}
+
+function startLotteryRoll() {
+    function roll() {
+        if (lotteryWidth) {
+            lotteryX -= lotterySpeed;
+            if (lotteryX <= -lotteryWidth) lotteryX = 0;
+            lotteryBox.style.transform = 'translateX(' + lotteryX + 'px)';
+        }
+        requestAnimationFrame(roll);
+    }
+    roll();
+}
+
+function startLotteryRoll() {
+    function roll() {
+        if (lotteryWidth) {
+            lotteryX -= lotterySpeed;
+            if (lotteryX <= -lotteryWidth) lotteryX = 0;
+            lotteryBox.style.transform = 'translateX(' + lotteryX + 'px)';
+        }
+        requestAnimationFrame(roll);
+    }
+    roll();
+}
+
+function goTo(url) { location.href = url; }
+function showPage1() {
+    document.getElementById("page1").style.display = "block";
+    document.getElementById("page2").style.display = "none";
+    document.getElementById("page3").style.display = "none";
+    document.body.style.overflow = "hidden";
+}
+function showPage2() {
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("page2").style.display = "block";
+    document.getElementById("page3").style.display = "none";
+    document.body.style.overflow = "auto";
+}
+function showPage3() {
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("page2").style.display = "none";
+    document.getElementById("page3").style.display = "block";
+    document.body.style.overflow = "auto";
+}
+
+const audio = document.getElementById('bgMusic');
+function initMusic(){
+    document.addEventListener('click', () => {
+        if (localStorage.audioTime) audio.currentTime = parseFloat(localStorage.audioTime);
+        audio.play().catch(()=>{});
+    }, { once: true });
+    setInterval(() => { if(audio.currentTime>0) localStorage.audioTime = audio.currentTime; }, 1000);
+}
+
+let albumIndex = 0;
+const slide = document.getElementById('slide');
+const totalImages = slide?.children.length || 0;
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+function updateBtnStatus() {
+    if(prevBtn) prevBtn.disabled = albumIndex === 0;
+    if(nextBtn) nextBtn.disabled = albumIndex === totalImages - 1;
+}
+function openAlbum() { albumIndex=0; updateSlide(); updateBtnStatus(); document.getElementById('albumModal').classList.add('show'); }
+function closeAlbum(e) { if(e.target === document.getElementById('albumModal')) document.getElementById('albumModal').classList.remove('show'); }
+if(prevBtn) prevBtn.onclick = () => { if(albumIndex>0){albumIndex--;updateSlide();updateBtnStatus();}}
+if(nextBtn) nextBtn.onclick = () => { if(albumIndex < totalImages-1){albumIndex++;updateSlide();updateBtnStatus();}}
+function updateSlide() { if(slide) slide.style.transform = `translateX(-${albumIndex * 100}%)`; }
+</script>
+
+</body>
+</html>
