@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>起源联盟 - 管理员后台</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+body {
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+}
+.page-title {
+    font-size: 2rem;
+    color: #ffcc00;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.rule-container {
+    background-color: #1a1a1a;
+    border-radius: 16px;
+    padding: 25px;
+    width: 100%;
+    max-width: 550px;
+    border: 1px solid #333;
+    margin-bottom: 25px;
+}
+.form-item {
+    margin-bottom: 18px;
+}
+.form-item label {
+    display: block;
+    color: #ffcc00;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+.form-item input {
+    width: 100%;
+    padding: 12px;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+}
+.btn-box {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+.btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.submit-btn {
+    background: #ffcc00;
+    color: #000;
+}
+.back-btn {
+    background: #333;
+    color: #fff;
+}
+
+.flow-footer {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 30px;
+  padding-bottom: 10px;
+  line-height: 1.4;
+}
+.flow-line {
+  height: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.flow-line a {
+  color: #fff !important;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.flow-line img {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<h1 class="page-title">管理员登录</h1>
+<div class="rule-container">
+    <form action="admin.php" method="post">
+
+        <div class="form-item">
+            <label>管理员账号</label>
+            <input type="text" name="user" value="admin" placeholder="请输入管理员账号" required>
+        </div>
+
+        <div class="form-item">
+            <label>管理员密码</label>
+            <input type="password" name="pwd" placeholder="请输入后台密码" required>
+        </div>
+
+        <div class="btn-box">
+            <button class="btn submit-btn" type="submit">进入管理后台</button>
+            <button class="btn back-btn" type="button" onclick="location.href='liuyan_show.php?t='+new Date().getTime()">返回留言墙</button>
+        </div>
+    </form>
+</div>
+
+<div class="flow-footer">
+  <div class="flow-line">本站内容仅供娱乐交流使用，禁止商用</div>
+  <div class="flow-line">© 2026 起源联盟 版权所有</div>
+  <div class="flow-line">
+    <a href="https://beian.miit.gov.cn/" target="_blank">
+      <img src="foot-icp.png" alt="备案">
+      浙ICP备2026025846号-1
+    </a>
+  </div>
+  <div class="flow-line">
+    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33052202000916" target="_blank">
+      <img src="foot-gongan.png" alt="公安备案">
+      浙公网安备33052202000916号
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
